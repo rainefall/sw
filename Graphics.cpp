@@ -2,18 +2,25 @@
 
 namespace SouthwestEngine {
 	// define static variables
+	glm::mat4 Graphics::OrthoProjection; // ortho projection matrix for sprites
 	SDL_Window* Graphics::SDL_Window;
 	SDL_GLContext Graphics::SDL_GLContext;
 	Uint32 Graphics::DeltaTime;
+	std::vector<Drawable2D*> Graphics::Drawables2D;
+	std::string Graphics::GLSLHeader;
 
-	int Graphics::Initialize() {
+	int Graphics::Initialize(const char* wintitle) {
 		// SDL OpenGL setup
 		SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
 		SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 		// create SDL window
-		SDL_Window = SDL_CreateWindow("Southwest Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 960, 540, SDL_WINDOW_OPENGL | SDL_WINDOW_HIDDEN);
+		SDL_Window = SDL_CreateWindow(wintitle, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 960, 540, SDL_WINDOW_OPENGL | SDL_WINDOW_HIDDEN);
+
+		// projection for 2d drawing
+		OrthoProjection = glm::ortho(0.0f, 960.0f, 540.0f, 0.0f, -1.0f, 1.0f);
+
 		if (!SDL_Window) {
 			SDL_Log("Unable to create SDL Window: %s", SDL_GetError());
 			return 1;
@@ -45,6 +52,55 @@ namespace SouthwestEngine {
 		std::cout << "OpenGL version: " << glGetString(GL_VERSION) << std::endl;
 		std::cout << "GLSL version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 
+		// create GLSL Header
+		GLSLHeader = "#version "; // Every GLSL program gotta start with this!
+		int gl_major, gl_minor;
+		glGetIntegerv(GL_MAJOR_VERSION, &gl_major);
+		glGetIntegerv(GL_MINOR_VERSION, &gl_minor);
+		const int glVersion = gl_major * 100 + gl_minor * 10;
+		if ((gl_major == 3 && gl_minor == 3) || gl_major > 3) {
+			GLSLHeader += std::to_string(gl_major) + std::to_string(gl_minor) + "0 core\n"; // modern opengl, use gl version as glsl version
+		}
+		else {
+			// old opengl, use glsl version number
+			if (gl_major == 3) {
+				if (gl_minor == 2) {
+					GLSLHeader += "150 core\n";
+				}
+				else if (gl_minor == 1) {
+					GLSLHeader += "140\n";
+				}
+				else if (gl_minor == 0) {
+					GLSLHeader += "130\n";
+				}
+			}
+			else if (gl_major == 2 || gl_major == 0) {
+				if (gl_minor == 1 || gl_minor == 10) {
+					GLSLHeader += "120\n";
+				}
+				else if (gl_minor == 0) {
+					GLSLHeader += "110\n";
+				}
+				// backwards compatibility stuff
+				// write shaders for GLSL 1.3+
+				// they should work on 1.1 and 1.2 as long as you dont use anything new
+				GLSLHeader +=
+					"#define in varying\n\
+			#define out varying\n\
+			#define texture texture2D\n\
+			#define aVertex gl_Vertex\n\
+			#define aNormal gl_Normal\n\
+			#define aTexCoord gl_MultiTexCoord0\n\
+			#define oFragColor gl_FragColor\n";
+			}
+			else {
+				std::cout << "Unsupported OpenGL version! (How did you get here????)\n";
+			}
+		}
+
+		// intialize sprite renderer
+		SpriteRenderer::Initialize();
+
 		// we can show the window now(!!!)
 		SDL_ShowWindow(SDL_Window);
 		// update the window so that it isnt white
@@ -63,9 +119,9 @@ namespace SouthwestEngine {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// to do: render things!
-		for(unsigned int i = 0; i < Sprites.size(); i++)
+		for(unsigned int i = 0; i < Drawables2D.size(); i++)
 		{
-			SpriteRenderer.Draw(Sprites[i]);
+			Drawables2D[i]->Draw();
 		}
 
 		// present frame

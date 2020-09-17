@@ -16,7 +16,7 @@ namespace SouthwestEngine {
 		void Bind();
 
 		// Load a texture from a file
-		static Texture FromFile(const char* path);
+		static Texture* FromFile(const char* path);
 
 		// Create a texture from a bitmap object stored in RAM
 		// but i haven't made bitmaps yet!!!!!!!!!!!!!!!!!!!!!!!!

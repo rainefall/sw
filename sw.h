@@ -7,6 +7,8 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <fstream>
+#include <sstream>
 // c stl
 #include <stdio.h>
 #include <stdlib.h> 
@@ -29,6 +31,7 @@
 #include "FileUtils.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "Drawable2D.h"
 #include "Sprite.h"
 #include "SpriteRenderer.h"
 #include "Input.h"
@@ -46,7 +49,7 @@ namespace SouthwestEngine {
 
 		// Initialize engine
 		// Returns 0 on success, 1 on failure
-		static int Initialize();
+		static int Initialize(const char* wintitle);
 
 		// Shutdown engine
 		static void Stop();

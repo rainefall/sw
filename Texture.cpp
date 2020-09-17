@@ -20,9 +20,9 @@ namespace SouthwestEngine {
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 
-	Texture Texture::FromFile(const char* path) {
+	Texture* Texture::FromFile(const char* path) {
 		SDL_Surface* surface = IMG_Load(path);
-		return Texture(surface);
+		return new Texture(surface);
 	}
 
 	void Texture::Bind() {

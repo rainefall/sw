@@ -7,10 +7,15 @@
 namespace SouthwestEngine {
 	class Shader {
 	private:
-		Shader(const char* vert, const char* frag, std::vector<const char*> uniforms );
+		Shader(const char* vert, const char* frag, std::map<const char*, const char*> uniforms );
+		// opengl id of this shader
+		unsigned int _program;
 	public:
-		// Create shader from .shader file
-		static Shader FromFile(const char* path);
+		// will likely remove this later i just kinda want to see if it works
+		operator GLuint() { return _program; }
+
+		// Create shader from .shd file
+		static Shader* FromFile(const char* path);
 
 		// Bind this shader as the currently active shader
 		void Bind();

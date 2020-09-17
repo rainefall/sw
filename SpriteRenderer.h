@@ -8,17 +8,23 @@ namespace SouthwestEngine {
 	class Sprite;
 
 	class SpriteRenderer {
-	public:
+	private:
 		SpriteRenderer();
+	public:
+		static void Initialize();
 
 		// Draw a sprite
-		void Draw(Sprite spr);
+		static void Draw(Sprite* spr);
 
+		// default sprite shader
+		static Shader* DefaultShader;
 
 		// vertex buffer object
-		unsigned int VBO;
+		static unsigned int VBO;
 		// vertex array object
-		unsigned int VAO;
+		static unsigned int VAO;
+		// element buffer object
+		static unsigned int EBO;
 	};
 }
 

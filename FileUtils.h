@@ -10,7 +10,13 @@ namespace SouthwestEngine {
 		// No
 		FileUtils();
 	public:
-		static char* ReadEntireFile(const char* path);
+		/** Read file into string. */
+		static inline std::string Slurp(const std::string& path) {
+			std::ostringstream buf;
+			std::ifstream input(path.c_str());
+			buf << input.rdbuf();
+			return buf.str();
+		}
 	};
 }
 

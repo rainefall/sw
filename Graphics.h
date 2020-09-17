@@ -4,7 +4,7 @@
 #include "sw.h"
 
 namespace SouthwestEngine {
-	class Sprite; // don't ask
+	class Sprite;
 
 	class Graphics {
 	private:
@@ -21,7 +21,7 @@ namespace SouthwestEngine {
 
 		// initalize graphics
 		// return 0 on success, 1 on failure
-		static int Initialize();
+		static int Initialize(const char* wintitle);
 
 		// draw the next frame
 		static void Update();
@@ -29,12 +29,14 @@ namespace SouthwestEngine {
 		// stop graphics engine
 		static void Stop();
 
+		// ortho projection matrix for sprites
+		static glm::mat4 OrthoProjection;
 
-		// Sprite renderer, renders the sprites
-		static SpriteRenderer SpriteRenderer;
+		// GLSL Header to maintain compatibility with old (<3.0) GLSL versions as well as GL|ES
+		static std::string GLSLHeader;
 
-		// vector containing all the sprites that currently exist
-		static std::vector<Sprite> Sprites;
+		// vector containing all the drawable 2d objects that currently exist
+		static std::vector<Drawable2D*> Drawables2D;
 	};
 }
 

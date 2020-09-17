@@ -4,7 +4,7 @@
 namespace SouthwestEngine {
 	bool Southwest::Running;
 
-	int Southwest::Initialize() {
+	int Southwest::Initialize(const char* wintitle) {
 		// i'd be lying if i said 90% of the boilerplate code here wasn't directly ripped from the old C++ SF engine
 		// which was ripped from my old game engine for monster ranger
 
@@ -22,7 +22,7 @@ namespace SouthwestEngine {
 		// Astounding work.
 
 		// initialize graphics engine
-		if (Graphics::Initialize() != 0) {
+		if (Graphics::Initialize(wintitle) != 0) {
 			SDL_Log("Unable to initialize Graphics engine");
 			return 1;
 		}

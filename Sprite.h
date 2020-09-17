@@ -5,15 +5,26 @@
 #include "sw.h"
 
 namespace SouthwestEngine {
-	class Sprite {
+	class Texture;
+
+	// structure holding all the data describing a sprite
+	class Sprite : public virtual Drawable2D {
 	public:
+		// create a new sprite object
 		Sprite();
 
 		// the texture to be applied to this sprite
 		Texture* Texture;
 
-		// assign a custom shader
-		Shader* Shader;
+		// sprite X position
+		int X;
+		// sprite Y position
+		int Y;
+		// sprite Z position
+		float Z;
+
+		// Draw sprite (aka pass this sprite to the SpriteRenderer instance)
+		void Draw() override;
 	};
 }
 
