@@ -8,7 +8,7 @@ namespace SouthwestEngine {
 	void SpriteRenderer::Initialize() {
 		DefaultShader = Shader::FromFile("Content/Shaders/Sprite.shd");
 		DefaultShader->Bind();
-		glUniformMatrix4fv(glGetUniformLocation((GLuint)DefaultShader, "projection"), 1, GL_FALSE, glm::value_ptr(Graphics::OrthoProjection));
+		glUniformMatrix4fv(glGetUniformLocation(DefaultShader->_program,"projection"), 1, GL_FALSE, glm::value_ptr(Graphics::OrthoProjection));
 
 		// opengl objects
 		float vertices[] = {
@@ -46,9 +46,16 @@ namespace SouthwestEngine {
 	}
 
 	void SpriteRenderer::Draw(Sprite* spr) {
+		// transformation matrix
 		glm::mat4 mat = glm::mat4(1.0f);
-		//mat = glm::translate(mat, glm::vec3(X, Y, Z)); // Z or [1/timecreated]
-		mat = glm::scale(mat, glm::vec3(200, 249, 1));
+		// translate
+		mat = glm::translate(mat, glm::vec3(spr->X-spr->OX, spr->Y-spr->OY, spr->Z)); // Z or [1/timecreated]
+		// rotation about (OX,OY)
+		mat = glm::translate(mat, glm::vec3(spr->OX, spr->OY, 0.0f));
+		mat = glm::rotate(mat, spr->Angle, glm::vec3(0.0f, 0.0f, 1.0f));
+		mat = glm::translate(mat, glm::vec3(-spr->OX, -spr->OY, 0.0f));
+		// scale
+		mat = glm::scale(mat, glm::vec3(471.0f, 397.0f, 1.0f));
 
 		spr->Texture->Bind();
 		if (spr->Shader != nullptr) {
@@ -56,9 +63,7 @@ namespace SouthwestEngine {
 		}
 
 		DefaultShader->Bind();
-		glUniformMatrix4fv(glGetUniformLocation((GLuint)DefaultShader,"model"), 1, GL_FALSE, glm::value_ptr(mat));
-			
-
+		glUniformMatrix4fv(glGetUniformLocation(DefaultShader->_program,"model"), 1, GL_FALSE, glm::value_ptr(mat));
 
 		// bind & draw sprite
 		glBindVertexArray(VAO);

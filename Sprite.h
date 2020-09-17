@@ -23,6 +23,14 @@ namespace SouthwestEngine {
 		// sprite Z position
 		float Z;
 
+		// sprite origin x
+		int OX;
+		// sprite origin y
+		int OY;
+
+		// angle of rotation
+		float Angle;
+
 		// Draw sprite (aka pass this sprite to the SpriteRenderer instance)
 		void Draw() override;
 	};

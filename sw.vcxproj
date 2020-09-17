@@ -103,6 +103,7 @@
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SDL)\x86-windows-dbg</AdditionalLibraryDirectories>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

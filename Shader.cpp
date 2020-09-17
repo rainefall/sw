@@ -3,6 +3,8 @@
 namespace SouthwestEngine {
 
 	Shader::Shader(const char* vert, const char* frag, std::map<const char*, const char*> uniforms) {
+		Uniforms = uniforms;
+
 		std::string vertsource = FileUtils::Slurp(vert);
 		std::string fragsource = FileUtils::Slurp(frag);
 
@@ -52,10 +54,10 @@ namespace SouthwestEngine {
 		}
 		glDeleteShader(vertexShader);
 		glDeleteShader(fragmentShader);
+	}
 
-		for (auto& e : uniforms) {
-			Uniforms[e.first] = glGetUniformLocation(_program, e.second);
-		}
+	int Shader::Uniform(const char* u) {
+		return glGetUniformLocation(_program, Uniforms[u]);
 	}
 
 	void Shader::Bind() {
