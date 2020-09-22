@@ -55,7 +55,7 @@ namespace SouthwestEngine {
 		mat = glm::rotate(mat, spr->Angle, glm::vec3(0.0f, 0.0f, 1.0f));
 		mat = glm::translate(mat, glm::vec3(-spr->OX, -spr->OY, 0.0f));
 		// scale
-		mat = glm::scale(mat, glm::vec3(471.0f, 397.0f, 1.0f));
+		mat = glm::scale(mat, glm::vec3((float)spr->Texture->GetWidth() * spr->ScaleX, (float)spr->Texture->GetHeight() * spr->ScaleY, 1));
 
 		spr->Texture->Bind();
 		if (spr->Shader != nullptr) {

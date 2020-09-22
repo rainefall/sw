@@ -86,16 +86,20 @@ namespace SouthwestEngine {
 				// they should work on 1.1 and 1.2 as long as you dont use anything new
 				GLSLHeader +=
 					"#define in varying\n\
-			#define out varying\n\
-			#define texture texture2D\n\
-			#define aVertex gl_Vertex\n\
-			#define aNormal gl_Normal\n\
-			#define aTexCoord gl_MultiTexCoord0\n\
-			#define oFragColor gl_FragColor\n";
+					#define out varying\n\
+					#define texture texture2D\n\
+					#define aVertex gl_Vertex\n\
+					#define aNormal gl_Normal\n\
+					#define aTexCoord gl_MultiTexCoord0\n\
+					#define oFragColor gl_FragColor\n";
 			}
 			else {
 				std::cout << "Unsupported OpenGL version! (How did you get here????)\n";
 			}
+		}
+
+		if (!GLEW_ARB_framebuffer_object) {
+			std::cout << "This GPU does not support Framebuffer Objects!\n";
 		}
 
 		// intialize sprite renderer

@@ -3,6 +3,9 @@
 namespace SouthwestEngine {
 
 	Texture::Texture(SDL_Surface* surface) {
+		Width = surface->w;
+		Height = surface->h;
+
 		// create texture object
 		glActiveTexture(0);
 		glGenTextures(1, &ID);

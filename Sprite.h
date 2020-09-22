@@ -28,6 +28,11 @@ namespace SouthwestEngine {
 		// sprite origin y
 		int OY;
 
+		// X scale
+		float ScaleX;
+		// Y scale
+		float ScaleY;
+
 		// angle of rotation
 		float Angle;
 
