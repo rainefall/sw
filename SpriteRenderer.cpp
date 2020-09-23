@@ -1,12 +1,19 @@
 #include "SpriteRenderer.h"
-
+#include "InternalShaders.h"
 
 namespace SouthwestEngine {
 	unsigned int SpriteRenderer::VBO, SpriteRenderer::EBO, SpriteRenderer::VAO; // opengl object
 	Shader* SpriteRenderer::DefaultShader; // default shader program
 
 	void SpriteRenderer::Initialize() {
-		DefaultShader = Shader::FromFile("Content/Shaders/Sprite.shd");
+		// create default shader
+		DefaultShader = new Shader(
+			DefaultSpriteShaderVert, DefaultSpriteShaderFrag, 
+			std::map<const char*, const char*>({
+				std::pair<const char*, const char*>("Projection Matrix", "projection"),
+				std::pair<const char*, const char*>("Transform", "model"),
+				std::pair<const char*, const char*>("Texture", "tex"),
+			}));
 		DefaultShader->Bind();
 		glUniformMatrix4fv(glGetUniformLocation(DefaultShader->_program,"projection"), 1, GL_FALSE, glm::value_ptr(Graphics::OrthoProjection));
 

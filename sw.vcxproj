@@ -164,6 +164,8 @@
     <ClInclude Include="FileUtils.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="InternalShaders.h" />
+    <ClInclude Include="RenderLayer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteRenderer.h" />

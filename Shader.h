@@ -6,9 +6,9 @@
 
 namespace SouthwestEngine {
 	class Shader {
-	private:
-		Shader(const char* vert, const char* frag, std::map<const char*, const char*> uniforms );
 	public:
+		Shader(const char* vert, const char* frag, std::map<const char*, const char*> uniforms);
+
 		// opengl id of this shader
 		unsigned int _program;
 
@@ -22,11 +22,11 @@ namespace SouthwestEngine {
 		void Bind();
 
 		// Map of shader uniforms
-		// <Human Readable Name, Internal Uniform name>
-		std::map<const char*, const char*> Uniforms;
+		// <Human Readable Name, Internal Uniform ID>
+		std::map<const char*, GLint> Uniforms;
 		
 		// get Uniform ID
-		int Uniform(const char* u);
+		GLint Uniform(const char* u);
 
 	};
 }

@@ -32,6 +32,7 @@
 #include "Shader.h"
 #include "Texture.h"
 #include "Drawable2D.h"
+#include "RenderLayer.h"
 #include "Sprite.h"
 #include "SpriteRenderer.h"
 #include "Input.h"

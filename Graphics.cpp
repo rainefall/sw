@@ -2,11 +2,18 @@
 
 namespace SouthwestEngine {
 	// define static variables
-	glm::mat4 Graphics::OrthoProjection; // ortho projection matrix for sprites
+
+	// SDL window pointer
 	SDL_Window* Graphics::SDL_Window;
+	// SDL OpenGL Context pointer
 	SDL_GLContext Graphics::SDL_GLContext;
+	// time passed since last frame
 	Uint32 Graphics::DeltaTime;
+	// list of drawable 2D objects to be drawn directly to the framebuffer
 	std::vector<Drawable2D*> Graphics::Drawables2D;
+	// ortho projection matrix for sprites
+	glm::mat4 Graphics::OrthoProjection;
+	// header for all shader source code, used for compatibility with older GL versions or GLES
 	std::string Graphics::GLSLHeader;
 
 	int Graphics::Initialize(const char* wintitle) {

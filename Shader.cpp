@@ -3,12 +3,8 @@
 namespace SouthwestEngine {
 
 	Shader::Shader(const char* vert, const char* frag, std::map<const char*, const char*> uniforms) {
-		Uniforms = uniforms;
 
-		std::string vertsource = FileUtils::Slurp(vert);
-		std::string fragsource = FileUtils::Slurp(frag);
-
-		const GLchar* src[] = { Graphics::GLSLHeader.c_str(), vertsource.c_str() };
+		const GLchar* src[] = { Graphics::GLSLHeader.c_str(), vert };
 
 
 		// compile shader
@@ -31,7 +27,7 @@ namespace SouthwestEngine {
 		}
 
 		fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-		src[1] = fragsource.c_str();
+		src[1] = frag;
 		glShaderSource(fragmentShader, 2, src, NULL);
 		glCompileShader(fragmentShader);
 
@@ -54,11 +50,19 @@ namespace SouthwestEngine {
 		}
 		glDeleteShader(vertexShader);
 		glDeleteShader(fragmentShader);
+
+		glUseProgram(_program);
+
+		for (auto& u : uniforms) {
+			Uniforms.insert(std::pair<const char*, GLint>(u.first, glGetUniformLocation(_program,u.second)));
+		}
 	}
 
-	int Shader::Uniform(const char* u) {
+	/*
+	GLint Shader::Uniform(const char* u) {
 		return glGetUniformLocation(_program, Uniforms[u]);
 	}
+	*/
 
 	void Shader::Bind() {
 		glUseProgram(_program);
@@ -84,11 +88,10 @@ namespace SouthwestEngine {
 		// it will have to do for now.
 		std::map<const char*, const char*> uniforms;
 		for (auto& m : doc["Uniforms"].GetObject()) {
-			uniforms[m.name.GetString()] = m.value.GetString();
+			uniforms.insert(std::pair<const char*, const char*>(m.name.GetString(), m.value.GetString()));
 		}
 
-
-		return new Shader(doc["VertexPath"].GetString(), doc["FragmentPath"].GetString(), uniforms);
+		return new Shader(FileUtils::Slurp(doc["VertexPath"].GetString()).c_str(), FileUtils::Slurp(doc["FragmentPath"].GetString()).c_str(), uniforms);
 	}
 }
 	
