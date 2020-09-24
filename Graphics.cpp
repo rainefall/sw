@@ -9,8 +9,10 @@ namespace SouthwestEngine {
 	SDL_GLContext Graphics::SDL_GLContext;
 	// time passed since last frame
 	Uint32 Graphics::DeltaTime;
-	// list of drawable 2D objects to be drawn directly to the framebuffer
-	std::vector<Drawable2D*> Graphics::Drawables2D;
+	// list of render layers
+	std::vector<RenderLayer*> Graphics::RenderLayers;
+	// compositor, stacks the render layers together
+	Compositor* Graphics::Compositor_;
 	// ortho projection matrix for sprites
 	glm::mat4 Graphics::OrthoProjection;
 	// header for all shader source code, used for compatibility with older GL versions or GLES
@@ -109,6 +111,10 @@ namespace SouthwestEngine {
 			std::cout << "This GPU does not support Framebuffer Objects!\n";
 		}
 
+		// inititalize compositor
+		Compositor_ = new Compositor();
+		RenderLayers.push_back(new RenderLayer());
+
 		// intialize sprite renderer
 		SpriteRenderer::Initialize();
 
@@ -119,6 +125,7 @@ namespace SouthwestEngine {
 		SDL_GL_SwapWindow(SDL_Window);
 		DeltaTime = 0;
 
+
 		// success!
 		return 0;
 	}
@@ -126,13 +133,19 @@ namespace SouthwestEngine {
 	void Graphics::Update() {
 		Uint32 start = SDL_GetTicks();
 
-		// clear screen
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		// to do: render things!
-		for(unsigned int i = 0; i < Drawables2D.size(); i++)
+		// render layers
+		for(unsigned int i = 0; i < RenderLayers.size(); i++)
 		{
-			Drawables2D[i]->Draw();
+			// only redraw the render layer if something on there has changed
+			if (RenderLayers[i]->Updated > 0)
+				RenderLayers[i]->Draw();
+		}
+
+		// clear screen
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		for (unsigned int i = 0; i < RenderLayers.size(); i++) {
+			Compositor_->DrawLayer(RenderLayers[i]);
 		}
 
 		// present frame

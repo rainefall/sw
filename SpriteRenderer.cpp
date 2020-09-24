@@ -65,19 +65,19 @@ namespace SouthwestEngine {
 		mat = glm::scale(mat, glm::vec3((float)spr->Texture->GetWidth() * spr->ScaleX, (float)spr->Texture->GetHeight() * spr->ScaleY, 1));
 
 		spr->Texture->Bind();
+
 		if (spr->Shader != nullptr) {
 			spr->Shader->Bind();
 		}
-
-		DefaultShader->Bind();
+		else {
+			DefaultShader->Bind();
+		}
+		
 		glUniformMatrix4fv(glGetUniformLocation(DefaultShader->_program,"model"), 1, GL_FALSE, glm::value_ptr(mat));
 
 		// bind & draw sprite
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
-
-		if (spr->Shader != nullptr)
-			DefaultShader->Bind();// bind default shader again
 	}
 }

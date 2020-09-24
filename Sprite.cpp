@@ -13,12 +13,12 @@ namespace SouthwestEngine {
 		ScaleX = 1.0f;
 		ScaleY = 1.0f;
 		// add to draw list
-		Graphics::Drawables2D.push_back(this);
+		_renderLayer->Drawables2D.push_back(this);
 	}
 
 	Sprite::Sprite() {
 		// default values
-		_renderLayer = nullptr;
+		_renderLayer = Graphics::RenderLayers[0];
 		X = 0;
 		Y = 0;
 		Z = 0.0f;
@@ -28,7 +28,7 @@ namespace SouthwestEngine {
 		ScaleX = 1.0f;
 		ScaleY = 1.0f;
 		// add to draw list
-		Graphics::Drawables2D.push_back(this);
+		_renderLayer->Drawables2D.push_back(this);
 	}
 
 	void Sprite::Draw() {

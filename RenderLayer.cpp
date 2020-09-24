@@ -3,10 +3,13 @@
 using namespace SouthwestEngine;
 
 RenderLayer::RenderLayer() {
+    Updated = 2; // for debug purposes
+    Shader = nullptr;
+
 	glGenFramebuffers(1, &FBO);
     glBindFramebuffer(GL_FRAMEBUFFER, FBO);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     // create a color attachment texture
-    unsigned int _tex;
     glGenTextures(1, &_tex);
     glBindTexture(GL_TEXTURE_2D, _tex);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 960, 540, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
@@ -29,6 +32,15 @@ RenderLayer::~RenderLayer() {
 
 }
 
+void RenderLayer::Draw() {
+    glBindFramebuffer(GL_FRAMEBUFFER, FBO);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    for (unsigned int i = 0; i < Drawables2D.size(); i++) {
+        Drawables2D[i]->Draw();
+    }
+}
+
 void RenderLayer::Bind() {
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glBindTexture(GL_TEXTURE_2D, _tex);
+    glBindRenderbuffer(GL_RENDERBUFFER, RBO);
 }

@@ -4,11 +4,15 @@
 #include "sw.h"
 
 namespace SouthwestEngine {
-	class Sprite;
+	class RenderLayer;
+	class Compositor;
 
 	class Graphics {
 	private:
 		Graphics(); // instance this class and i will start crying
+
+		// compositor, stacks render layers together
+		static Compositor* Compositor_;
 	public:
 		// SDL window pointer
 		static SDL_Window* SDL_Window;
@@ -35,8 +39,8 @@ namespace SouthwestEngine {
 		// GLSL Header to maintain compatibility with old (<3.0) GLSL versions as well as GL|ES
 		static std::string GLSLHeader;
 
-		// vector containing all the drawable 2d objects that currently exist
-		static std::vector<Drawable2D*> Drawables2D;
+		// list of render layers
+		static std::vector<RenderLayer*> RenderLayers;
 	};
 }
 

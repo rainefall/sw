@@ -74,15 +74,7 @@ namespace SouthwestEngine {
 		doc.Parse(FileUtils::Slurp(path).c_str());
 
 
-		// check that the json is valid
-		//assert(doc.IsObject());
-		assert(doc.HasMember("VertexPath"));
-		assert(doc.HasMember("FragmentPath"));
-		assert(doc.HasMember("Uniforms"));
-		assert(doc["VertexPath"].IsString());
-		assert(doc["FragmentPath"].IsString());
-		assert(doc["Uniforms"].IsObject());
-		// all good, probably
+		// you should check that the json is valid
 
 		// this is slightly annoying and it may not be the best way to get the strings out of the array
 		// it will have to do for now.

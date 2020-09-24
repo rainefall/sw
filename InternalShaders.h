@@ -29,16 +29,4 @@ void main() {
 	}
 }
 )";
-
-const char* DefaultRenderLayerShaderVert = R"(
-in vec2 iPosition;
-out vec2 TexCoord;
-
-uniform float depth;
-
-void main() {
-	gl_Position = vec4(iPosition, depth, 1.0f);
-	TexCoord = vec2(iPosition.x / 2 + 0.5, iPosition.y / 2 + 0.5);
-}
-)";
 #endif

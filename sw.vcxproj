@@ -160,6 +160,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Compositor.h" />
     <ClInclude Include="Drawable2D.h" />
     <ClInclude Include="FileUtils.h" />
     <ClInclude Include="Graphics.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Texture.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Compositor.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="RenderLayer.cpp" />
