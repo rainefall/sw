@@ -25,6 +25,18 @@
     <Filter Include="Source Files\Input">
       <UniqueIdentifier>{a0447144-1869-4ba2-87c5-e1d6890b75aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Graphics\2D">
+      <UniqueIdentifier>{27301f20-8400-4b0b-aa44-886898892c21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphics\3D">
+      <UniqueIdentifier>{d6834a75-1b77-491a-814d-c2d834480955}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics\2D">
+      <UniqueIdentifier>{71b9dc0a-646f-43d5-8539-ddbb422fda70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics\3D">
+      <UniqueIdentifier>{74f03b40-93eb-409e-9459-68c9c7c6ced5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sw.h">
@@ -45,15 +57,6 @@
     <ClInclude Include="FileUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Drawable2D.h">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteRenderer.h">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="InternalShaders.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
@@ -62,6 +65,21 @@
     </ClInclude>
     <ClInclude Include="Compositor.h">
       <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawable2D.h">
+      <Filter>Header Files\Graphics\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files\Graphics\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Header Files\Graphics\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>Header Files\Graphics\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Header Files\Graphics\3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -80,17 +98,23 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteRenderer.cpp">
-      <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="RenderLayer.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Compositor.cpp">
       <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Source Files\Graphics\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Source Files\Graphics\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files\Graphics\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source Files\Graphics\3D</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -38,6 +38,10 @@ void RenderLayer::Draw() {
     for (unsigned int i = 0; i < Drawables2D.size(); i++) {
         Drawables2D[i]->Draw();
     }
+
+    for (unsigned int i = 0; i < Drawables3D.size(); i++) {
+        Drawables3D[i]->Draw();
+    }
 }
 
 void RenderLayer::Bind() {

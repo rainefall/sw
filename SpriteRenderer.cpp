@@ -14,6 +14,7 @@ namespace SouthwestEngine {
 				std::pair<const char*, const char*>("Transform", "model"),
 				std::pair<const char*, const char*>("Texture", "tex"),
 			}));
+		// set ortho matrix on default shader
 		DefaultShader->Bind();
 		glUniformMatrix4fv(glGetUniformLocation(DefaultShader->_program,"projection"), 1, GL_FALSE, glm::value_ptr(Graphics::OrthoProjection));
 

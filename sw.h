@@ -27,15 +27,22 @@
 // rapidjson
 #include <rapidjson/document.h>
 
-// engine stuff
+// Utils
 #include "FileUtils.h"
+// Graphics: Common
 #include "Shader.h"
 #include "Texture.h"
+// Graphics: 3D
+#include "Mesh.h"
+#include "Model.h"
+// Graphics: 2D
 #include "Drawable2D.h"
 #include "Sprite.h"
 #include "SpriteRenderer.h"
+// Graphics: Layers
 #include "RenderLayer.h"
 #include "Compositor.h"
+// Core
 #include "Input.h"
 #include "Graphics.h"
 
