@@ -1,5 +1,4 @@
 #include "SpriteRenderer.h"
-#include "InternalShaders.h"
 
 namespace SouthwestEngine {
 	unsigned int SpriteRenderer::VBO, SpriteRenderer::EBO, SpriteRenderer::VAO; // opengl object
@@ -8,7 +7,7 @@ namespace SouthwestEngine {
 	void SpriteRenderer::Initialize() {
 		// create default shader
 		DefaultShader = new Shader(
-			DefaultSpriteShaderVert, DefaultSpriteShaderFrag, 
+			InternalShaders::SpriteShaderVert, InternalShaders::SpriteShaderFrag, 
 			std::map<const char*, const char*>({
 				std::pair<const char*, const char*>("Projection Matrix", "projection"),
 				std::pair<const char*, const char*>("Transform", "model"),

@@ -30,6 +30,7 @@
 // Utils
 #include "FileUtils.h"
 // Graphics: Common
+#include "InternalShaders.h"
 #include "Shader.h"
 #include "Texture.h"
 // Graphics: 3D

@@ -109,7 +109,10 @@ namespace SouthwestEngine {
 
 		if (!GLEW_ARB_framebuffer_object) {
 			std::cout << "This GPU does not support Framebuffer Objects!\n";
+			return 1;
 		}
+
+		InternalShaders::CompileAll();
 
 		// inititalize compositor
 		Compositor_ = new Compositor();

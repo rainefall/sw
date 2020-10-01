@@ -116,5 +116,8 @@
     <ClCompile Include="Model.cpp">
       <Filter>Source Files\Graphics\3D</Filter>
     </ClCompile>
+    <ClCompile Include="InternalShaders.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

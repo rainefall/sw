@@ -8,6 +8,7 @@ Model::Model(std::vector<Mesh*> m) {
 }
 
 void Model ::Draw() {
+	InternalShaders::Diffuse->Bind();
 	for (unsigned int i = 0; i < Meshes.size(); i++) {
 		Meshes[i]->Draw();
 	}

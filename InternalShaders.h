@@ -1,32 +1,33 @@
 #pragma once
 #ifndef DEFAULTSHADERS_H
 #define DEFAULTSHADERS_H
-const char* DefaultSpriteShaderVert = R"(
-in vec2 iPosition;
+#include "sw.h"
 
-out vec2 TexCoord;
+namespace SouthwestEngine {
+	class Shader;
 
-uniform mat4 model;
-uniform mat4 projection;
+	class InternalShaders {
+	private:
+		InternalShaders();
+		static bool compiled;
+	public:
+		static void CompileAll();
 
-void main() {
-	gl_Position = projection * model * vec4(iPosition, 0.0f, 1.0f);
-	TexCoord = iPosition;
+		static const char* SpriteShaderVert;
+		static const char* SpriteShaderFrag;
+
+		static const char* RenderLayerShaderVert;
+		static const char* RenderLayerShaderFrag;
+
+		// Standard 3D vertex shader with perspective projection, view & model matrices
+		static const char* Default3DVert;
+		// Default shading model, diffuse
+		static const char* DiffuseSrc;
+		// Default shading model, phong (diffuse + specular)
+		static const char* PhongSrc;
+
+		// Default diffuse shader
+		static Shader* Diffuse;
+	};
 }
-)";
-
-const char* DefaultSpriteShaderFrag = R"(
-in vec2 TexCoord;
-
-out vec4 oFragCol;
-
-uniform sampler2D tex;
-
-void main() {
-	oFragCol = texture(tex, TexCoord);
-	if (oFragCol.a == 0) {
-		discard;
-	}
-}
-)";
 #endif

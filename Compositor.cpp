@@ -3,40 +3,9 @@
 using namespace SouthwestEngine;
 
 Compositor::Compositor() {
-	// i dont know why
-	// i dont want to know why
-	// but i have to put these here otherwise i get multpluy defined symbol errors despite the fact that i am not defining them multiple times
-	// god
-	const char* DefaultRLShaderVert = R"(
-	in vec2 iPosition;
-	in vec2 iTexCoord;
-	out vec2 TexCoord;
-
-	uniform float depth;
-
-	void main() {
-		gl_Position = vec4(iPosition, depth, 1.0f);
-		TexCoord = iTexCoord;
-	}
-	)";
-
-		const char* DefaultRLShaderFrag = R"(
-	in vec2 TexCoord;
-
-	out vec4 oFragCol;
-
-	uniform sampler2D tex;
-
-	void main() {
-		oFragCol = texture(tex, TexCoord);
-		if (oFragCol.a == 0) {
-			discard;
-		}
-	}
-	)";
 
 	// a very ugly line of code, but good luck convincing me to change it
-	DefaultShader = new Shader(DefaultRLShaderVert, DefaultRLShaderFrag, std::map<const char*, const char*>({ std::pair<const char*, const char*>("Texture", "tex") }));
+	DefaultShader = new Shader(InternalShaders::RenderLayerShaderVert, InternalShaders::RenderLayerShaderFrag, std::map<const char*, const char*>({ std::pair<const char*, const char*>("Texture", "tex") }));
 	glUniform1i(glGetUniformLocation(DefaultShader->_program, "tex"), 0);
 
 	// create screen quad
