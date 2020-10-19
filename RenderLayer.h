@@ -5,7 +5,7 @@
 #include "sw.h"
 
 namespace SouthwestEngine {
-	class Model;
+	class Mesh;
 
 	class RenderLayer {
 	private:
@@ -24,7 +24,7 @@ namespace SouthwestEngine {
 		std::vector<Drawable2D*> Drawables2D;
 
 		// list of drawable 3D objects in this render layer
-		std::vector<Model*> Drawables3D;
+		std::vector<Mesh*> Drawables3D;
 
 		// bind this render layer and draw its contents to the FBO
 		void Draw();

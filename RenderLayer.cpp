@@ -29,7 +29,12 @@ RenderLayer::RenderLayer() {
 }
 
 RenderLayer::~RenderLayer() {
-
+    // JUST IN CASE
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    // delete all the opengl objects associated with this renderlayer
+    glDeleteTextures(1, &_tex);
+    glDeleteBuffers(1, &FBO);
+    glDeleteBuffers(1, &RBO);
 }
 
 void RenderLayer::Draw() {

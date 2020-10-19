@@ -18,6 +18,8 @@ namespace SouthwestEngine {
 		// create new mesh
 		Mesh(std::vector<Vertex> vert, std::vector<unsigned int> ind);
 
+		~Mesh();
+
 		// draw this mesh to the screen
 		void Draw();
 

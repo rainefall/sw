@@ -34,24 +34,41 @@ Mesh::Mesh(std::vector<Vertex> vert, std::vector<unsigned int> ind) {
 
 	// vertex attrib info, it will be a miracle if this works first time
 	// i may have to change all the vertex attrib stuff at some point because (layout = n) doesnt work in older gl versions
-	glVertexAttribPointer(0, 12, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0); // vert
+	// but at the same time I DO NOT NEED OLDER GL VERSIONS
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0); // vert
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 12, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(3*sizeof(float))); // vert
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(3*sizeof(float))); // vert
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(2, 12, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)(6 * sizeof(float))); // vert
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)(6 * sizeof(float))); // vert
 	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(3, 12, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(8 * sizeof(float))); // vert
+	glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(8 * sizeof(float))); // vert
 	glEnableVertexAttribArray(3);
 
 	// all done!
 	glBindVertexArray(0);
 
-	for (unsigned int i = 0; i < Vertices.size(); i++) {
-		std::cout << Vertices[i].Position[0] << std::endl;
-	}
+
+	Graphics::RenderLayers[1]->Drawables3D.push_back(this);
+}
+
+Mesh::~Mesh() {
+	// delete all objects associated with this mesh
+	glDeleteBuffers(1, &VBO);
+	glDeleteBuffers(1, &EBO);
+	glDeleteVertexArrays(1, &VAO);
 }
 
 void Mesh::Draw() {
+	glm::mat4 proj = glm::perspective(60.0f, 16.0f / 9.0f, 0.01f, 100.0f);
+	glm::mat4 mdl = glm::mat4(1.0f);
+	mdl = glm::scale(mdl, glm::vec3(1.0f, 1.0f, 0.0f));
+	glm::mat4 view = glm::mat4(1.0f);
+
+	InternalShaders::Diffuse->Bind();
+	glUniformMatrix4fv(glGetUniformLocation(InternalShaders::Diffuse->_program, "projection"), 1, GL_FALSE, glm::value_ptr(proj));
+	glUniformMatrix4fv(glGetUniformLocation(InternalShaders::Diffuse->_program, "model"), 1, GL_FALSE, glm::value_ptr(mdl));
+	glUniformMatrix4fv(glGetUniformLocation(InternalShaders::Diffuse->_program, "view"), 1, GL_FALSE, glm::value_ptr(view));
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, Indices.size(), GL_UNSIGNED_INT, nullptr);
+	glBindVertexArray(0);
 }

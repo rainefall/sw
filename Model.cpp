@@ -4,17 +4,25 @@ using namespace SouthwestEngine;
 
 Model::Model(std::vector<Mesh*> m) {
 	Meshes = m;
-	Graphics::RenderLayers[1]->Drawables3D.push_back(this);
 }
 
-void Model ::Draw() {
-	InternalShaders::Diffuse->Bind();
+Model::~Model() {
+	for (unsigned int i = 0; i < Meshes.size(); i++) {
+		delete Meshes[i];
+	}
+}
+
+void Model::Draw() {
 	for (unsigned int i = 0; i < Meshes.size(); i++) {
 		Meshes[i]->Draw();
 	}
 }
 
 Model* Model::FromFile(const char* path) {
+#ifndef DEBUG
+	std::cout << "WARNING::LOAD_FROM_FILE: Game is attempting to load 3D model at " << path << ". For security reasons, don't do this.";
+#endif
+
 	Assimp::Importer importer;
 
 	// assimp import scene
