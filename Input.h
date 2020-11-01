@@ -10,6 +10,8 @@ namespace SouthwestEngine {
 		// There is no need
 		// to instance this class
 		Input();
+
+		static SDL_Joystick* _joystick;
 	public:
 		static void Update();
 	};
