@@ -1,6 +1,9 @@
 #include "Input.h"
 
 namespace SouthwestEngine {
+
+	SDL_Joystick* Input::_joystick;
+
 	void Input::Update() {
 		if (SDL_NumJoysticks() > 0) {
 			if (_joystick == nullptr) {

@@ -102,7 +102,7 @@ Shader* InternalShaders::Diffuse;
 const char* InternalShaders::DiffuseSrc = R"(
 in vec3 fNormal;
 in vec2 fTexCoord;
-in vec3 fVertexColour;
+in vec4 fVertexColour;
 
 out vec4 oFragCol;
 
