@@ -12,6 +12,7 @@ namespace SouthwestEngine {
 		Angle = 0.0f;
 		ScaleX = 1.0f;
 		ScaleY = 1.0f;
+		Texture = nullptr;
 		// add to draw list
 		_renderLayer->Drawables2D.push_back(this);
 	}
@@ -27,6 +28,7 @@ namespace SouthwestEngine {
 		Angle = 0.0f;
 		ScaleX = 1.0f;
 		ScaleY = 1.0f;
+		Texture = nullptr;
 		// add to draw list
 		_renderLayer->Drawables2D.push_back(this);
 	}

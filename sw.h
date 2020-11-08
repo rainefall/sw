@@ -34,6 +34,7 @@
 #include "Shader.h"
 #include "Texture.h"
 // Graphics: 3D
+#include "Camera.h"
 #include "Mesh.h"
 #include "Model.h"
 // Graphics: 2D

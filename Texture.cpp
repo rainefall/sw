@@ -7,7 +7,7 @@ namespace SouthwestEngine {
 		Height = surface->h;
 
 		// create texture object
-		glActiveTexture(0);
+		glActiveTexture(GL_TEXTURE0);
 		glGenTextures(1, &ID);
 		glBindTexture(GL_TEXTURE_2D, ID);
 
@@ -30,7 +30,7 @@ namespace SouthwestEngine {
 
 	void Texture::Bind() {
 		// Bind this texture to opengl texture 0
-		glActiveTexture(0);
+		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, ID);
 	}
 }

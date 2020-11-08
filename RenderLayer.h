@@ -6,6 +6,7 @@
 
 namespace SouthwestEngine {
 	class Mesh;
+	class Camera;
 
 	class RenderLayer {
 	private:
@@ -22,9 +23,10 @@ namespace SouthwestEngine {
 
 		// list of drawable 2D objects in this render layer
 		std::vector<Drawable2D*> Drawables2D;
-
 		// list of drawable 3D objects in this render layer
 		std::vector<Mesh*> Drawables3D;
+		// 3D camera used for drawing 3D objects in this render layer
+		Camera* Camera;
 
 		// bind this render layer and draw its contents to the FBO
 		void Draw();

@@ -14,6 +14,9 @@ namespace SouthwestEngine {
 		Model(std::vector<Mesh*> m);
 		~Model();
 
+		// process an ainode object, should only be called internaly so its private
+		static void processAiNode(std::vector<Mesh*>* m, aiNode* n, const aiScene* scene);
+
 		// process an aiMesh object, should only be called internally so its private
 		static Mesh* processAiMesh(aiMesh* m, const aiScene* scene);
 	public:
