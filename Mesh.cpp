@@ -47,7 +47,7 @@ Mesh::Mesh(std::vector<Vertex> vert, std::vector<unsigned int> ind) {
 	// all done!
 	glBindVertexArray(0);
 
-	Graphics::RenderLayers[0]->Drawables3D.push_back(this);
+	Graphics::RenderLayers[1]->Drawables3D.push_back(this);
 }
 
 Mesh::~Mesh() {
