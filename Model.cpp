@@ -14,26 +14,27 @@ Model::~Model() {
 
 void Model::Draw() {
 	for (unsigned int i = 0; i < Meshes.size(); i++) {
-		Meshes[i]->Draw();
+		//Meshes[i]->Draw();
 	}
 }
 
 Model* Model::FromFile(const char* path) {
 #ifndef DEBUG
-	std::cout << "WARNING::LOAD_FROM_FILE: Game is attempting to load 3D model at " << path << ". For security reasons, don't do this.";
+	std::cout << "WARNING::LOAD_FROM_FILE: Game is attempting to load 3D model at " << path << ". For security reasons, don't do this." << std::endl;
 #endif
 
 	Assimp::Importer importer;
 
 	// assimp import scene
 	const aiScene* scene = importer.ReadFile(path,
-		aiProcess_CalcTangentSpace |
+		//aiProcess_CalcTangentSpace |
 		aiProcess_Triangulate |
 		aiProcess_JoinIdenticalVertices |
-		aiProcess_SortByPType |
-		aiProcess_FlipUVs |
-		aiProcess_OptimizeMeshes |
-		aiProcess_OptimizeGraph);
+		//aiProcess_SortByPType |
+		aiProcess_FlipUVs //|
+		//aiProcess_OptimizeMeshes |
+		//aiProcess_OptimizeGraph
+	);
 
 	// if scene import failed, tell me why
 	if (!scene) {
@@ -42,11 +43,20 @@ Model* Model::FromFile(const char* path) {
 	}
 	else {
 		std::vector<Mesh*> m;
-		for (unsigned int i = 0; i < scene->mNumMeshes; i++) {
-			m.push_back(processAiMesh(scene->mMeshes[i], scene));
-		}
-
+		processAiNode(&m, scene->mRootNode, scene);
 		return new Model(m);
+	}
+}
+
+void Model::processAiNode(std::vector<Mesh*>* m, aiNode* n, const aiScene* scene) {
+	// process meshes
+	for (unsigned int i = 0; i < n->mNumMeshes; i++) {
+		m->push_back(processAiMesh(scene->mMeshes[n->mMeshes[i]], scene));
+	}
+
+	// process child nodes
+	for (unsigned int i = 0; i < n->mNumChildren; i++) {
+		processAiNode(m, n->mChildren[i], scene);
 	}
 }
 
@@ -57,36 +67,51 @@ Mesh* Model::processAiMesh(aiMesh* m, const aiScene* scene) {
 	for (unsigned int i = 0; i < m->mNumVertices; i++) {
 		Vertex vert;
 		// vertex position
-		vert.Position[0] = m->mVertices->x;
-		vert.Position[1] = m->mVertices->y;
-		vert.Position[2] = m->mVertices->z;
+		vert.Position[0] = m->mVertices[i].x;
+		vert.Position[1] = m->mVertices[i].y;
+		vert.Position[2] = m->mVertices[i].z;
+
 		// vertex normals
-		vert.Normal[0] = m->mNormals->x;
-		vert.Normal[1] = m->mNormals->y;
-		vert.Normal[2] = m->mNormals->z;
+		vert.Normal[0] = m->mNormals[i].x;
+		vert.Normal[1] = m->mNormals[i].y;
+		vert.Normal[2] = m->mNormals[i].z;
+
 		// texcoords
 		// check if we have texture coordinates
 		if (m->mTextureCoords[0]) {
-			vert.TexCoord[0] = m->mTextureCoords[0]->x;
-			vert.TexCoord[1] = m->mTextureCoords[0]->y;
+			vert.TexCoord[0] = m->mTextureCoords[0][i].x;
+			vert.TexCoord[1] = m->mTextureCoords[0][i].y;
 		}
+		else {
+			vert.TexCoord[0] = 0.0f;
+			vert.TexCoord[1] = 0.0f;
+		}
+
 		// vertex colour
 		// check that there are colours
 		if (m->mColors[0]) {
 			// there is only one colour
 			// sorry brom?
-			vert.Colour[0] = m->mColors[0]->r;
-			vert.Colour[1] = m->mColors[0]->g;
-			vert.Colour[2] = m->mColors[0]->b;
-			vert.Colour[3] = m->mColors[0]->a;
+			vert.Colour[0] = m->mColors[0][i].r;
+			vert.Colour[1] = m->mColors[0][i].g;
+			vert.Colour[2] = m->mColors[0][i].b;
+			vert.Colour[3] = m->mColors[0][i].a;
 		}
+		else {
+			// default colour white
+			vert.Colour[0] = 1.0f;
+			vert.Colour[1] = 1.0f;
+			vert.Colour[2] = 1.0f;
+			vert.Colour[3] = 1.0f;
+		}
+
 		// done!
 		verts.push_back(vert);
 	}
 
 	for (unsigned int i = 0; i < m->mNumFaces; i++) {
 		aiFace face = m->mFaces[i];
-		// shouldnt be more than 3 indices to a face because triangulate but just in case
+		// shouldnt be more than 3 indices to a face because triangulate
 		for (unsigned int j = 0; j < face.mNumIndices; j++) {
 			inds.push_back(face.mIndices[j]);
 		}

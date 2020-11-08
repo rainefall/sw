@@ -161,6 +161,8 @@ namespace SouthwestEngine {
 	void Graphics::Update() {
 		Uint32 start = SDL_GetTicks();
 
+		// enable z buffer
+		glEnable(GL_DEPTH_TEST);
 		// render layers
 		for(unsigned int i = 0; i < RenderLayers.size(); i++)
 		{
@@ -169,6 +171,8 @@ namespace SouthwestEngine {
 				RenderLayers[i]->Draw();
 		}
 
+		// disable z buffer to draw render layers
+		glDisable(GL_DEPTH_TEST);
 		// clear screen
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

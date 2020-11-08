@@ -16,6 +16,7 @@ namespace SouthwestEngine {
 		// set ortho matrix on default shader
 		DefaultShader->Bind();
 		glUniformMatrix4fv(glGetUniformLocation(DefaultShader->_program,"projection"), 1, GL_FALSE, glm::value_ptr(Graphics::OrthoProjection));
+		glUniform1i(glGetUniformLocation(DefaultShader->_program, "tex"), 0);
 
 		// opengl objects
 		float vertices[] = {

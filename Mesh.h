@@ -21,7 +21,7 @@ namespace SouthwestEngine {
 		~Mesh();
 
 		// draw this mesh to the screen
-		void Draw();
+		void Draw(glm::mat4 view, glm::mat4 projection);
 
 		// vector of vertices in this mesh
 		std::vector<Vertex> Vertices;

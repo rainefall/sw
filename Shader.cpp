@@ -3,12 +3,10 @@
 namespace SouthwestEngine {
 
 	Shader::Shader(const char* vert, const char* frag, std::map<const char*, const char*> uniforms) {
-
+		// create source code array with GLSL headers
 		const GLchar* src[] = { Graphics::GLSLHeader.c_str(), vert };
 
-
 		// compile shader
-
 		unsigned int vertexShader, fragmentShader;
 
 		// vertex shader
@@ -72,7 +70,6 @@ namespace SouthwestEngine {
 		// parse json
 		rapidjson::Document doc;
 		doc.Parse(FileUtils::Slurp(path).c_str());
-
 
 		// you should check that the json is valid
 

@@ -1,7 +1,6 @@
 #include "Input.h"
 
 namespace SouthwestEngine {
-
 	SDL_Joystick* Input::_joystick;
 
 	void Input::Update() {

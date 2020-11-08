@@ -8,7 +8,7 @@ namespace SouthwestEngine {
 	class RenderLayer;
 
 	class Compositor {
-		unsigned int VBO, EBO, VAO;
+		unsigned int VBO, VAO;
 	public:
 		// Intended for internal use only.
 		Compositor();

@@ -77,10 +77,10 @@ void main() {
 )";
 
 const char* InternalShaders::Default3DVert = R"(
-layout (location = 0) in vec3 iPosition;
-layout (location = 1) in vec3 iNormal;
-layout (location = 2) in vec2 iTexCoord;
-layout (location = 3) in vec4 iVertexColour;
+in vec3 iPosition;
+in vec3 iNormal;
+in vec2 iTexCoord;
+in vec4 iVertexColour;
 
 out vec3 fNormal;
 out vec2 fTexCoord;
@@ -91,7 +91,7 @@ uniform mat4 view;
 uniform mat4 model;
 
 void main() {
-	gl_Position = view * model * vec4(iPosition, 1.0);
+	gl_Position = projection * view * model * vec4(iPosition, 1.0);
 	fNormal = iNormal;
 	fTexCoord = iTexCoord;
 	fVertexColour = iVertexColour;
