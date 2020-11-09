@@ -2,6 +2,10 @@
 #ifndef RENDERLAYER_H
 #define RENDERLAYER_H
 
+#define RENDERLAYER_2D_BACKGROUND 0
+#define RENDERLAYER_3D 1
+#define RENDERLAYER_2D_FOREGROUND 2
+
 #include "sw.h"
 
 namespace SouthwestEngine {

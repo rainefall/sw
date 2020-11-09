@@ -140,8 +140,9 @@ namespace SouthwestEngine {
 
 		// inititalize compositor
 		Compositor_ = new Compositor();
-		RenderLayers.push_back(new RenderLayer()); // 2D foreground
+		RenderLayers.push_back(new RenderLayer()); // 2D background
 		RenderLayers.push_back(new RenderLayer()); // 3D
+		RenderLayers.push_back(new RenderLayer()); // 2D foreground
 
 		// intialize sprite renderer
 		SpriteRenderer::Initialize();

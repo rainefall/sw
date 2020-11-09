@@ -59,7 +59,7 @@ Mesh::~Mesh() {
 
 void Mesh::Draw(glm::mat4 view, glm::mat4 projection) {
 	glm::mat4 mdl = glm::mat4(1.0f);
-	mdl = glm::scale(mdl, glm::vec3(0.1f, 0.1f, 0.1f));
+	mdl = glm::scale(mdl, glm::vec3(1.0f));
 
 	InternalShaders::Diffuse->Bind();
 	glUniformMatrix4fv(glGetUniformLocation(InternalShaders::Diffuse->_program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));

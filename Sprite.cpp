@@ -19,7 +19,7 @@ namespace SouthwestEngine {
 
 	Sprite::Sprite() {
 		// default values
-		_renderLayer = Graphics::RenderLayers[0];
+		_renderLayer = Graphics::RenderLayers[RENDERLAYER_2D_FOREGROUND];
 		X = 0;
 		Y = 0;
 		Z = 0.0f;

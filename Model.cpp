@@ -19,7 +19,7 @@ void Model::Draw() {
 }
 
 Model* Model::FromFile(const char* path) {
-#ifndef DEBUG
+#ifndef _DEBUG
 	std::cout << "WARNING::LOAD_FROM_FILE: Game is attempting to load 3D model at " << path << ". For security reasons, don't do this." << std::endl;
 #endif
 

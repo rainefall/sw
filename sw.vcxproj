@@ -99,6 +99,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(LIB)\PhysicsFS\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -106,10 +107,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2maind.lib;opengl32.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2maind.lib;opengl32.lib;PhysicsFSd.lib</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>$(SDL)\x86-windows-dbg</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SDL)\x86-windows-dbg;$(LIB)\PhysicsFS\lib\x86\Debug</AdditionalLibraryDirectories>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </Lib>
   </ItemDefinitionGroup>
