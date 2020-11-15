@@ -41,6 +41,11 @@ void RenderLayer::Draw() {
     glBindFramebuffer(GL_FRAMEBUFFER, FBO);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     for (unsigned int i = 0; i < Drawables2D.size(); i++) {
+        if (Drawables2D[i]->Disposed()) {
+            delete Drawables2D[i];
+            Drawables2D.erase(Drawables2D.begin() + i);
+            continue;
+        }
         Drawables2D[i]->Draw();
     }
 

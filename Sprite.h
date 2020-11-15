@@ -9,7 +9,7 @@ namespace SouthwestEngine {
 	class RenderLayer;
 
 	// structure holding all the data describing a sprite
-	class Sprite : public virtual Drawable2D {
+	class Sprite : public Drawable2D {
 	private:
 		RenderLayer* _renderLayer;
 	public:
@@ -46,7 +46,10 @@ namespace SouthwestEngine {
 		RenderLayer* GetRenderLayer();
 
 		// Draw sprite (aka pass this sprite to the SpriteRenderer instance)
-		void Draw() override;
+		void Draw();
+
+		void Dispose();
+		bool Disposed();
 	};
 }
 

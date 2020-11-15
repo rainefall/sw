@@ -6,6 +6,7 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <stack>
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -46,6 +47,9 @@
 // Graphics: Layers
 #include "RenderLayer.h"
 #include "Compositor.h"
+// scene/state management
+#include "Scene.h"
+#include "Director.h"
 // Core
 #include "Input.h"
 #include "Graphics.h"

@@ -11,6 +11,7 @@
 namespace SouthwestEngine {
 	class Mesh;
 	class Camera;
+	class Drawable2D;
 
 	class RenderLayer {
 	private:

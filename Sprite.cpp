@@ -13,6 +13,7 @@ namespace SouthwestEngine {
 		ScaleX = 1.0f;
 		ScaleY = 1.0f;
 		Texture = nullptr;
+		__disposed = false;
 		// add to draw list
 		_renderLayer->Drawables2D.push_back(this);
 	}
@@ -29,11 +30,21 @@ namespace SouthwestEngine {
 		ScaleX = 1.0f;
 		ScaleY = 1.0f;
 		Texture = nullptr;
+		__disposed = false;
 		// add to draw list
 		_renderLayer->Drawables2D.push_back(this);
 	}
 
 	void Sprite::Draw() {
 		SpriteRenderer::Draw(this);
+	}
+
+	void Sprite::Dispose() {
+		if (!__disposed)
+			__disposed = true;
+	}
+
+	bool Sprite::Disposed() {
+		return __disposed;
 	}
 }
