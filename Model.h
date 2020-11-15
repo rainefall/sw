@@ -20,8 +20,14 @@ namespace SouthwestEngine {
 		// process an aiMesh object, should only be called internally so its private
 		static Mesh* processAiMesh(aiMesh* m, const aiScene* scene);
 	public:
+		// Load a model from archive storage
+		static Model* Load(const char* path);
+
+		// Load a model from a location in memory
+		static Model* LoadFromMemory(void* buf, int len);
+
 		// Load a model from a file. Not recommended for production use.
-		static Model* FromFile(const char* path);
+		static Model* LoadFromFile(const char* path);
 
 		std::vector<Mesh*> Meshes;
 

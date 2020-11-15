@@ -20,8 +20,14 @@ namespace SouthwestEngine {
 		// Bind this texture as the current active opengl texture
 		void Bind();
 
-		// Load a texture from a file
-		static Texture* FromFile(const char* path);
+		// Load a texture from archive storage
+		static Texture* Load(const char* path);
+
+		// Load a texture from a location in memory.
+		static Texture* LoadFromMemory(void* buf, int len);
+
+		// Load a texture from a file. Not recommended for production use.
+		static Texture* LoadFromFile(const char* path);
 
 		// Get Width of texture
 		int GetWidth() { return Width; }

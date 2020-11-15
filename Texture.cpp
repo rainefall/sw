@@ -23,7 +23,22 @@ namespace SouthwestEngine {
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 
-	Texture* Texture::FromFile(const char* path) {
+	Texture* Texture::Load(const char* path) {
+		// get file and length from archive
+		void* buf;
+		int len;
+		// to do, implement that lol
+		
+		return Texture::LoadFromMemory(buf, len);
+	}
+
+	Texture* Texture::LoadFromMemory(void* buf, int len) {
+		SDL_RWops* rw = SDL_RWFromMem(buf, len);
+		SDL_Surface* surface = IMG_Load_RW(rw, 1);
+		return new Texture(surface);
+	}
+
+	Texture* Texture::LoadFromFile(const char* path) {
 		SDL_Surface* surface = IMG_Load(path);
 		return new Texture(surface);
 	}

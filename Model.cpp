@@ -18,7 +18,41 @@ void Model::Draw() {
 	}
 }
 
-Model* Model::FromFile(const char* path) {
+Model* Model::Load(const char* path) {
+	// get file and length from archive
+	void* buf;
+	int len;
+	// to do, implement that lol
+
+	return Model::LoadFromMemory(buf, len);
+}
+
+Model* Model::LoadFromMemory(void* buf, int len) {
+	Assimp::Importer importer;
+	// assimp import scene
+	const aiScene* scene = importer.ReadFileFromMemory(buf, len,
+		//aiProcess_CalcTangentSpace |
+		aiProcess_Triangulate |
+		aiProcess_JoinIdenticalVertices |
+		//aiProcess_SortByPType |
+		aiProcess_FlipUVs //|
+		//aiProcess_OptimizeMeshes |
+		//aiProcess_OptimizeGraph
+	);
+
+	// if scene import failed, tell me why
+	if (!scene) {
+		printf("ERROR::ASSIMP - %s\n", importer.GetErrorString());
+		return nullptr;
+	}
+	else {
+		std::vector<Mesh*> m;
+		processAiNode(&m, scene->mRootNode, scene);
+		return new Model(m);
+	}
+}
+
+Model* Model::LoadFromFile(const char* path) {
 #ifndef _DEBUG
 	std::cout << "WARNING::LOAD_FROM_FILE: Game is attempting to load 3D model at " << path << ". For security reasons, don't do this." << std::endl;
 #endif
