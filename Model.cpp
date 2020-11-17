@@ -20,8 +20,8 @@ void Model::Draw() {
 
 Model* Model::Load(const char* path) {
 	// get file and length from archive
-	void* buf;
-	int len;
+	void* buf = malloc(0);
+	int len = 0;
 	// to do, implement that lol
 
 	return Model::LoadFromMemory(buf, len);

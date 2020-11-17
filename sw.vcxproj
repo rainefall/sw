@@ -107,10 +107,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2maind.lib;opengl32.lib;PhysicsFSd.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2maind.lib;opengl32.lib</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>$(SDL)\x86-windows-dbg;$(LIB)\PhysicsFS\lib\x86\Debug</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SDL)\x86-windows-dbg</AdditionalLibraryDirectories>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </Lib>
   </ItemDefinitionGroup>

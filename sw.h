@@ -27,8 +27,6 @@
 #include <assimp/postprocess.h>
 // rapidjson
 #include <rapidjson/document.h>
-// physicsfs
-#include <physfs.h>
 
 // Utils
 #include "FileUtils.h"
