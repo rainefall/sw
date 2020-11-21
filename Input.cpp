@@ -3,7 +3,11 @@
 using namespace SouthwestEngine;
 
 SDL_Joystick* Input::_joystick;
+const Uint8* Input::__SDL_Keyboard;
 const Uint8* Input::__keyboard;
+const Uint8* Input::__keyboardChange; // Do you need this one to be declared too?
+									  // Uncertain on if you plan to use it later,
+									  // so yeah take a declaration...!
 
 void Input::Update() {
 	if (SDL_NumJoysticks() > 0) {
