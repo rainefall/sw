@@ -90,6 +90,9 @@
     <ClInclude Include="Director.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Maths.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sw.cpp">
@@ -135,6 +138,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Maths.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

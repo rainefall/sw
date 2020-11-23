@@ -178,6 +178,7 @@
     <ClInclude Include="Drawable2D.h" />
     <ClInclude Include="FileUtils.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Maths.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="InternalShaders.h" />
@@ -196,6 +197,7 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="InternalShaders.cpp" />
+    <ClCompile Include="Maths.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="RenderLayer.cpp" />
