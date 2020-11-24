@@ -26,6 +26,9 @@ namespace SouthwestEngine {
 			SDL_Log("Unable to initialize Graphics engine");
 			return 1;
 		}
+
+		// initialize input engine
+		Input::Initialize();
 		
 		// we can run the game(!!)
 		Running = true;

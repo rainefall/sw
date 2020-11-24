@@ -14,9 +14,12 @@ namespace SouthwestEngine {
 		static SDL_Joystick* _joystick;
 
 		static const Uint8* __SDL_Keyboard;
-		static const Uint8* __keyboard;
-		static const Uint8* __keyboardChange;
+		static Uint8* __keyboard;
+		static Uint8* __keyboardChange;
+
+		static int __arrSize;
 	public:
+		static void Initialize();
 		static void Update();
 
 		// keyboard input
