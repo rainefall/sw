@@ -93,6 +93,9 @@
     <ClInclude Include="Maths.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sw.cpp">

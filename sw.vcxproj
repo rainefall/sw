@@ -178,6 +178,7 @@
     <ClInclude Include="Drawable2D.h" />
     <ClInclude Include="FileUtils.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="Maths.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Input.h" />

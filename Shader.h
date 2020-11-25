@@ -9,6 +9,8 @@ namespace SouthwestEngine {
 	public:
 		Shader(const char* vert, const char* frag, std::map<const char*, const char*> uniforms);
 
+		// path used to identify this shader
+
 		// opengl id of this shader
 		unsigned int _program;
 
