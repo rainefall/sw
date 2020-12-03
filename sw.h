@@ -27,6 +27,8 @@
 #include <assimp/postprocess.h>
 // rapidjson
 #include <rapidjson/document.h>
+// fmod
+#include <fmod.hpp>
 
 // Utils
 #include "FileUtils.h"
