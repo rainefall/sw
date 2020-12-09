@@ -37,6 +37,18 @@
     <Filter Include="Source Files\Graphics\3D">
       <UniqueIdentifier>{74f03b40-93eb-409e-9459-68c9c7c6ced5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Debug">
+      <UniqueIdentifier>{276ae0b6-a9a8-4f33-ad2b-d476fbcbb1f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Debug">
+      <UniqueIdentifier>{b7ba5f1c-d1e3-465a-9037-cc9416a64e05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Audio">
+      <UniqueIdentifier>{ee0616dc-85a2-434e-bc13-254333012f32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Audio">
+      <UniqueIdentifier>{cddbaa59-f762-4e75-bb0b-c718f02613c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sw.h">
@@ -96,6 +108,12 @@
     <ClInclude Include="Material.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="ContentArchiveCompiler.h">
+      <Filter>Header Files\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>Header Files\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sw.cpp">
@@ -145,6 +163,9 @@
     </ClCompile>
     <ClCompile Include="Maths.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio.cpp">
+      <Filter>Source Files\Audio</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

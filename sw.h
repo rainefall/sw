@@ -10,6 +10,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <cmath>
 // c stl
 #include <stdio.h>
 #include <stdlib.h> 
@@ -52,6 +53,7 @@
 #include "Scene.h"
 #include "Director.h"
 // Core
+#include "Audio.h"
 #include "Input.h"
 #include "Graphics.h"
 
