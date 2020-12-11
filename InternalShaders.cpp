@@ -8,7 +8,7 @@ using namespace SouthwestEngine;
 
 bool InternalShaders::compiled;
 void InternalShaders::CompileAll() {
-	Diffuse = new Shader(Default3DVert, DiffuseSrc,
+	Diffuse = new Shader(Default3DVert, RenderLayerShaderFrag,
 		std::map<const char*, const char*>({
 				std::pair<const char*, const char*>("Camera Projection", "projection"),
 				std::pair<const char*, const char*>("Camera Transform", "view"),
