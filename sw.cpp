@@ -30,6 +30,9 @@ namespace SouthwestEngine {
 		// initialize input engine
 		Input::Initialize();
 		
+		// initialize audio engine
+		AudioSystem::Initialize();
+
 		// we can run the game(!!)
 		Running = true;
 
@@ -37,6 +40,10 @@ namespace SouthwestEngine {
 	}
 
 	void Southwest::Stop() {
+		Director::Pop();
+
+		// stop audio engine
+		AudioSystem::Stop();
 		// stop graphics engine
 		Graphics::Stop();
 
