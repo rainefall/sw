@@ -114,6 +114,9 @@
     <ClInclude Include="Audio.h">
       <Filter>Header Files\Audio</Filter>
     </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sw.cpp">
@@ -166,6 +169,9 @@
     </ClCompile>
     <ClCompile Include="Audio.cpp">
       <Filter>Source Files\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

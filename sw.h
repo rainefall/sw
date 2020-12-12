@@ -57,6 +57,8 @@
 #include "Input.h"
 #include "Graphics.h"
 
+#define SW_SAFE_DELETE( p )       { if( p ) { delete ( p );     ( p ) = nullptr; } }
+
 namespace SouthwestEngine {
 	class Southwest {
 	private:
