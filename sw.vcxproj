@@ -214,9 +214,6 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="RenderLayer.cpp" />
     <ClCompile Include="Director.cpp" />
-    <ClCompile Include="ResourceManager.cpp">
-      <DeploymentContent>true</DeploymentContent>
-    </ClCompile>
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Sprite.cpp" />

@@ -56,8 +56,7 @@
 #include "Audio.h"
 #include "Input.h"
 #include "Graphics.h"
-
-#define SW_SAFE_DELETE( p )       { if( p ) { delete ( p );     ( p ) = nullptr; } }
+#include "ResourceManager.h"
 
 namespace SouthwestEngine {
 	class Southwest {

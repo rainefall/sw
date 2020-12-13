@@ -7,116 +7,86 @@
 
 namespace SouthwestEngine
 {
-    // Special thanks to gamedev.net!
+    // Special thanks to Robert Wells!
     // Link below for more info
-    // https://www.gamedev.net/tutorials/_/technical/game-programming/a-simple-fast-resource-manager-using-c-and-stl-r2503/
+    // https://thatgamesguy.co.uk/cpp-game-dev-9/
 
-    class Resource
+    class AssetBase
     {
-        std::string m_fileName; // The name used for the asset on its own (ex. dummy.png)
-        std::string m_filePath; // Path to the file in the file sys (ex. assets/)
-        std::string m_fileLocation; // Name in the file sys (ex. assets/dummy.png)
-        unsigned int m_handle; // UUID
-        unsigned int m_instanceCount;
-        std::unordered_map<std::string, unsigned int> m_dependencies; // "null_dep" and 00000000 00000000 00000000 00000000 for the UUID is treated as the end of the dep list
+        std::string m_assetName;
+        unsigned int m_uuid;
 
     public:
-        Resource(const unsigned int handle, const std::unordered_map<std::string, unsigned int>& dependencies, const std::string& fileName, const std::string& filePath = "./") {
-            // If the name isn't empty, store it
-            if (!fileName.empty())
-                m_fileName = fileName;
-
-            if (!filePath.empty())
-                m_filePath = filePath;
-
-            m_handle = handle;
-
-            // Appends path and name together to make its file name
-            if (!fileName.empty() && !filePath.empty())
-                m_fileLocation = filePath + fileName;
-
-            m_dependencies = dependencies;
+        AssetBase(const std::string& assetName, const unsigned int uuid) {
+            m_assetName = assetName;
+            m_uuid = uuid;
         }
-        virtual ~Resource() = 0; // To be implemented by the derived class
-
-        std::string GetFileName() { return m_fileName; }
-        std::string GetFilePath() { return m_filePath; }
-        std::string GetFileLocation() { return m_fileLocation; }
-        unsigned int GetHandle() { return m_handle; }
-        unsigned int GetInstanceCount() { return m_instanceCount; }
-        void AddInstance() { m_instanceCount++; }
-        void RemoveInstance() { 
-            if (m_instanceCount > 0)
-                m_instanceCount--;
-            else
-                assert(0 && "There are no more instances of this resource.");
-        }
+        virtual ~AssetBase() = 0; // To be implemented by the derived class
+        virtual bool Load(unsigned int uuid) = 0; // Loading from UUID
+        virtual bool Load(const std::string& fileName) = 0; // Loading from file
+        const std::string& GetAssetName() const { return m_assetName; }
     };
 
     template <class T>
-    class ResourceManager
+    class AssetManagerBase
     {
-        typedef void (*CB_CreateResource)(T**, const unsigned int, const std::string&, const std::string&); // Callback function that is called by the resource manager when a resource is added
-        CB_CreateResource m_CreateResourceFunc;
-        // Maybe we should change this to std::function or smth
-        // Set to null if it's not used
-        std::unordered_map<unsigned int, T*>* m_handleMap; // The handle acts as the key in the map
-        // Might consider changing from raw pointer to a smart pointer
+        unsigned int m_currentHandle;
+        std::unordered_map<std::string, std::pair<unsigned int, std::shared_ptr<T>>> m_assetMap;
+
     public:
-        ResourceManager(CB_CreateResource CreateResourceFunc) {
-            m_handleMap = new std::unordered_map<unsigned int, T*>;
-            m_CreateResourceFunc = CreateResourceFunc;
-        }
-        ~ResourceManager() {
-            ClearResourceList();
-            SW_SAFE_DELETE(m_handleMap);
-        }
+        AssetManagerBase() {}
+        ~AssetManagerBase() {}
+        
+        unsigned int AddAsset(const std::string& fileName) {
+            if (fileName.empty())
+                assert(0 && "ERROR: File name is null");
 
-        // @ret Returns -1 if the handle map is not initialized or if the name/path is empty. Returns the handle otherwise.
-        unsigned int AddResource(const std::string& fileName, const std::string& filePath = "./") {
-            if (m_handleMap == nullptr || fileName.empty() || filePath.empty())
-                return -1;
+            // Maybe we should add some util stuff for strings so we can
+            // trim and force asset name case
 
-            // Checks if the resource already exists, then returns a pointer if it does exist
-            T* resource = GetResource(fileName, filePath);
-            if (resource != nullptr) {
-                resource->AddInstance();
-                return resource->GetHandle();
+            // Sees if the asset has already been loaded
+            // and returns the loaded asset if it's been
+            // loaded already
+            auto it = m_assetMap.find(fileName);
+            if (it != m_assetMap) {
+                return it->second.first;
             }
 
-            m_handleMap->emplace(resource->GetHandle(), resource);
-        }
-
-        void RemoveResource(const unsigned int handle) {
-            // Returns if the handle map is empty
-            if (m_handleMap->empty()) {
-                std::cerr << "ERROR: Attempted to remove a resource when there are no resources present." << std::endl;
-                return;
+            // Loads the asset if it hasn't already been
+            // loaded then inserts it into m_assetHandleMap
+            std::shared_ptr<T> asset = std::make_shared<T>();
+            if (!asset->Load(fileName)) {
+                return 0xFFFFFFFF; // Returns 0xFFFFFFFF on failure
             }
 
-            T* resource = (*m_handleMap)[handle];
-            resource->RemoveInstance();
-
-            if (resource->GetInstanceCount() == 0) {
-                delete resource;
-                (*m_handleMap)[handle] = nullptr;
-            }
+            m_assetMap.insert(fileName, std::make_pair(m_currentHandle, asset));
+            return m_currentHandle++; // Returns m_currentHandle before incrementing it
         }
 
-        void ClearResourceList() {
-            for (int i = 0; i < m_handleMap->end(); i++) {
-                SW_SAFE_DELETE( (*m_handleMap)[i] );
+        // Returns true on success, false on failure
+        void RemoveAsset(const unsigned int handle) {
+            for (auto it = m_assetMap.begin(); it != m_assetMap.end(); ++it) {
+                if (it->second.first == handle) {
+                    m_assetMap.erase(it->first);
+                    return true;
+                }
             }
+            return false;
         }
 
-        T* GetResource(const int handle) { // Get resource by handle, will in theory run faster
-            if ((*m_handleMap)[handle] != nullptr)
-                return (*m_handleMap)[handle];
+        std::shared_ptr<T> GetAsset(const unsigned int handle) {
+            for (auto it = m_assetMap.begin(); it != m_assetMap.end(); ++it) {
+                if (it->second.first == handle) {
+                    return it->second.second;
+                }
+            }
 
             return nullptr;
         }
-        T* GetResource(const std::string& fileName, const std::string& filePath); // Overlaid func, get resource by file name and path
-        std::unordered_map<unsigned int, T*>* GetHandleMap() { return m_handleMap; }
+
+        bool ContainsAsset(const unsigned int handle) {
+            return (GetAsset(handle) != nullptr);
+        }
     };
 }
 
