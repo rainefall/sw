@@ -1,6 +1,6 @@
 #pragma once
-#ifndef RESOURCE_MANAGER_H
-#define RESOURCE_MANAGER_H
+#ifndef ASSET_MANAGER_H
+#define ASSET_MANAGER_H
 
 #include "sw.h"
 #include <unordered_map>
