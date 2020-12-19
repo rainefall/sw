@@ -63,6 +63,8 @@ namespace SouthwestEngine {
 	private:
 		// static class, don't instance
 		Southwest(); 
+		// internal storage for pref path so you cant modify it
+		static char* _prefPath;
 	public:
 		// Should the game be running?
 		// Ideally you should use this in your main loop to make it, uh, loop
@@ -70,10 +72,13 @@ namespace SouthwestEngine {
 
 		// Initialize engine
 		// Returns 0 on success, 1 on failure
-		static int Initialize(const char* wintitle);
+		// org can be nullptr, it will default to Tobesoft for now
+		static int Initialize(const char* title, const char* org);
 
 		// Shutdown engine
 		static void Stop();
+
+		static char* GetPrefPath();
 	};
 }
 

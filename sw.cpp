@@ -3,10 +3,14 @@
 
 namespace SouthwestEngine {
 	bool Southwest::Running;
+	char* Southwest::_prefPath;
 
-	int Southwest::Initialize(const char* wintitle) {
+	int Southwest::Initialize(const char* title, const char* org) {
 		// i'd be lying if i said 90% of the boilerplate code here wasn't directly ripped from the old C++ SF engine
 		// which was ripped from my old game engine for monster ranger
+
+		if (org == nullptr)
+			org = "Tobesoft";
 
 		// absolute favourite part about SDL
 		// SDL_Init returns 0 on success
@@ -22,7 +26,7 @@ namespace SouthwestEngine {
 		// Astounding work.
 
 		// initialize graphics engine
-		if (Graphics::Initialize(wintitle) != 0) {
+		if (Graphics::Initialize(title) != 0) {
 			SDL_Log("Unable to initialize Graphics engine");
 			return 1;
 		}
@@ -32,6 +36,10 @@ namespace SouthwestEngine {
 		
 		// initialize audio engine
 		AudioSystem::Initialize();
+
+		// get platform specific pref path
+		// thank you SDL for making this easier
+		_prefPath = SDL_GetPrefPath(org, title);
 
 		// we can run the game(!!)
 		Running = true;
@@ -52,5 +60,9 @@ namespace SouthwestEngine {
 		SDL_Quit();
 
 		// bye!!
+	}
+
+	char* Southwest::GetPrefPath() {
+		return _prefPath;
 	}
 }
