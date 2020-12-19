@@ -9,7 +9,7 @@ namespace SouthwestEngine {
 
 	// Provides an easy way to load a large number of meshes at once.
 	// Note that you may want finer control over the mesh loading if you are planning on assigning custom shaders to individual meshes.
-	class Model {
+	class Model /*: AssetBase*/ {
 	private:
 		Model(std::vector<Mesh*> m);
 		~Model();
@@ -19,6 +19,10 @@ namespace SouthwestEngine {
 
 		// process an aiMesh object, should only be called internally so its private
 		static Mesh* processAiMesh(aiMesh* m, const aiScene* scene);
+
+		glm::mat4 _modelMatrix;
+		glm::vec3 _position;
+		glm::vec3 _rotation;
 	public:
 		// Load a model from archive storage
 		static Model* Load(const char* path);
@@ -28,6 +32,33 @@ namespace SouthwestEngine {
 
 		// Load a model from a file. Not recommended for production use.
 		static Model* LoadFromFile(const char* path);
+
+		// Move the model
+		void Translate(float x, float y, float z);
+
+		// Rotate the model (euler angles)
+		void Rotate(float x, float y, float z);
+
+		// Get the model's world X coordinate
+		float GetX();
+
+		// Get the model's world Y coordinate
+		float GetY();
+
+		// Get the model's world Z coordinate
+		float GetZ();
+
+		// Set the model's world X coordinate
+		void SetX(float x);
+
+		// Set the model's world Y coordinate
+		void SetY(float y);
+
+		// Set the model's world Z coordinate
+		void SetZ(float z);
+
+		// Manually set the model matrix
+		void SetMatrix(glm::mat4 matrix);
 
 		std::vector<Mesh*> Meshes;
 

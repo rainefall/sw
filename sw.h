@@ -56,7 +56,7 @@
 #include "Audio.h"
 #include "Input.h"
 #include "Graphics.h"
-#include "ResourceManager.h"
+#include "AssetManager.h"
 
 namespace SouthwestEngine {
 	class Southwest {

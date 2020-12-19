@@ -21,7 +21,10 @@ namespace SouthwestEngine
             m_assetName = assetName;
             m_uuid = uuid;
         }
-        virtual ~AssetBase() = 0; // To be implemented by the derived class
+
+        virtual ~AssetBase() { // To be implemented by the derived class
+        }
+
         virtual bool Load(unsigned int uuid) = 0; // Loading from UUID
         virtual bool Load(const std::string& fileName) = 0; // Loading from file
         const std::string& GetAssetName() const { return m_assetName; }

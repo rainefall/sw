@@ -124,8 +124,6 @@ Mesh* Model::processAiMesh(aiMesh* m, const aiScene* scene) {
 		// vertex colour
 		// check that there are colours
 		if (m->mColors[0]) {
-			// there is only one colour
-			// sorry brom?
 			vert.Colour[0] = m->mColors[0][i].r;
 			vert.Colour[1] = m->mColors[0][i].g;
 			vert.Colour[2] = m->mColors[0][i].b;
@@ -152,4 +150,47 @@ Mesh* Model::processAiMesh(aiMesh* m, const aiScene* scene) {
 	}
 
 	return new Mesh(verts, inds);
+}
+
+void Model::Translate(float x, float y, float z)
+{
+	_modelMatrix = glm::translate(_modelMatrix, glm::vec3(x, y, z));
+	_position.x += x;
+	_position.y += y;
+	_position.z += z;
+}
+
+void Model::Rotate(float x, float y, float z)
+{
+	// todo: implement
+}
+
+// set model coordinates
+void Model::SetX(float x) {
+	_position.x = x;
+}
+
+void Model::SetY(float y) {
+	_position.y = y;
+}
+
+void Model::SetZ(float z) {
+	_position.z = z;
+}
+
+// get model coordinates
+float Model::GetX() {
+	return _position.x;
+}
+
+float Model::GetY() {
+	return _position.y;
+}
+
+float Model::GetZ() {
+	return _position.z;
+}
+
+void Model::SetMatrix(glm::mat4 matrix) {
+	_modelMatrix = matrix;
 }
