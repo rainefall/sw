@@ -5,7 +5,18 @@ using namespace SouthwestEngine;
 Mesh::Mesh(std::vector<Vertex> vert, std::vector<unsigned int> ind) {
 	Vertices = vert;
 	Indices = ind;
+	SetupMesh();
+	Graphics::RenderLayers[1]->Drawables3D.push_back(this);
+}
 
+Mesh::~Mesh() {
+	// delete all objects associated with this mesh
+	glDeleteBuffers(1, &VBO);
+	glDeleteBuffers(1, &EBO);
+	glDeleteVertexArrays(1, &VAO);
+}
+
+void Mesh::SetupMesh() {
 	// generate objects
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
@@ -46,15 +57,6 @@ Mesh::Mesh(std::vector<Vertex> vert, std::vector<unsigned int> ind) {
 
 	// all done!
 	glBindVertexArray(0);
-
-	Graphics::RenderLayers[1]->Drawables3D.push_back(this);
-}
-
-Mesh::~Mesh() {
-	// delete all objects associated with this mesh
-	glDeleteBuffers(1, &VBO);
-	glDeleteBuffers(1, &EBO);
-	glDeleteVertexArrays(1, &VAO);
 }
 
 void Mesh::Draw(glm::mat4 view, glm::mat4 projection) {

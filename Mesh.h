@@ -14,6 +14,8 @@ namespace SouthwestEngine {
 	class Mesh {
 	private:
 		unsigned int VAO, VBO, EBO;
+		bool drawBackfaces;
+		void SetupMesh();
 	public:
 		// create new mesh
 		Mesh(std::vector<Vertex> vert, std::vector<unsigned int> ind);
