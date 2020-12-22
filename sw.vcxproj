@@ -195,7 +195,6 @@
     <ClInclude Include="InternalShaders.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="RenderLayer.h" />
-    <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Sprite.h" />

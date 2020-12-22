@@ -8,14 +8,15 @@ using namespace SouthwestEngine;
 
 bool InternalShaders::compiled;
 void InternalShaders::CompileAll() {
-	Diffuse = new Shader(Default3DVert, RenderLayerShaderFrag,
+	Diffuse = new Shader(Default3DVert, DiffuseSrc,
 		std::map<const char*, const char*>({
 				std::pair<const char*, const char*>("Camera Projection", "projection"),
 				std::pair<const char*, const char*>("Camera Transform", "view"),
 				std::pair<const char*, const char*>("Transform", "model")
 			}));
 	Diffuse->Bind();
-	glUniformMatrix4fv(glGetUniformLocation(Diffuse->_program, "projection"), 1, GL_FALSE, glm::value_ptr(Graphics::OrthoProjection));
+	glUniform1i(glGetUniformLocation(Diffuse->program, "tex"), 0);
+	glUniformMatrix4fv(glGetUniformLocation(Diffuse->program, "projection"), 1, GL_FALSE, glm::value_ptr(Graphics::OrthoProjection));
 	compiled = true;
 }
 
@@ -106,7 +107,9 @@ in vec4 fVertexColour;
 
 out vec4 oFragCol;
 
+uniform sampler2D tex;
+
 void main() {
-	oFragCol = vec4(1.0);
+	oFragCol = texture(tex, fTexCoord);
 }
 )";

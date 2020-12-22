@@ -64,9 +64,12 @@ void Mesh::Draw(glm::mat4 view, glm::mat4 projection) {
 	mdl = glm::scale(mdl, glm::vec3(1.0f));
 
 	InternalShaders::Diffuse->Bind();
-	glUniformMatrix4fv(glGetUniformLocation(InternalShaders::Diffuse->_program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-	glUniformMatrix4fv(glGetUniformLocation(InternalShaders::Diffuse->_program, "model"), 1, GL_FALSE, glm::value_ptr(mdl));
-	glUniformMatrix4fv(glGetUniformLocation(InternalShaders::Diffuse->_program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(glGetUniformLocation(InternalShaders::Diffuse->program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+	glUniformMatrix4fv(glGetUniformLocation(InternalShaders::Diffuse->program, "model"), 1, GL_FALSE, glm::value_ptr(mdl));
+	glUniformMatrix4fv(glGetUniformLocation(InternalShaders::Diffuse->program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, 4);
 
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, Indices.size(), GL_UNSIGNED_INT, 0);

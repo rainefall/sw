@@ -6,7 +6,7 @@
 
 namespace SouthwestEngine {
 
-	class Material {
+	class Material : AssetBase {
 	private:
 		// create material from json string
 		Material(const char* string);

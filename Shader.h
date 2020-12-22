@@ -12,10 +12,10 @@ namespace SouthwestEngine {
 		// path used to identify this shader
 
 		// opengl id of this shader
-		unsigned int _program;
+		unsigned int program;
 
 		// will likely remove this later i just kinda want to see if it works
-		operator GLuint() { return _program; }
+		operator GLuint() { return program; }
 
 		// Create shader from .shd file
 		static Shader* FromFile(const char* path);

@@ -37,33 +37,33 @@ namespace SouthwestEngine {
 			std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
 		}
 
-		_program = glCreateProgram();
-		glAttachShader(_program, vertexShader);
-		glAttachShader(_program, fragmentShader);
-		glLinkProgram(_program);
-		glGetProgramiv(_program, GL_LINK_STATUS, &success);
+		program = glCreateProgram();
+		glAttachShader(program, vertexShader);
+		glAttachShader(program, fragmentShader);
+		glLinkProgram(program);
+		glGetProgramiv(program, GL_LINK_STATUS, &success);
 		if (!success) {
-			glGetProgramInfoLog(_program, 512, NULL, infoLog);
+			glGetProgramInfoLog(program, 512, NULL, infoLog);
 			std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
 		}
 		glDeleteShader(vertexShader);
 		glDeleteShader(fragmentShader);
 
-		glUseProgram(_program);
+		glUseProgram(program);
 
 		for (auto& u : uniforms) {
-			Uniforms.insert(std::pair<const char*, GLint>(u.first, glGetUniformLocation(_program,u.second)));
+			Uniforms.insert(std::pair<const char*, GLint>(u.first, glGetUniformLocation(program,u.second)));
 		}
 	}
 
 	/*
 	GLint Shader::Uniform(const char* u) {
-		return glGetUniformLocation(_program, Uniforms[u]);
+		return glGetUniformLocation(program, Uniforms[u]);
 	}
 	*/
 
 	void Shader::Bind() {
-		glUseProgram(_program);
+		glUseProgram(program);
 	}
 
 	Shader* Shader::FromFile(const char* path) {

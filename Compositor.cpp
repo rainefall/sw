@@ -6,7 +6,7 @@ Compositor::Compositor() {
 
 	// a very ugly line of code, but good luck convincing me to change it
 	DefaultShader = new Shader(InternalShaders::RenderLayerShaderVert, InternalShaders::RenderLayerShaderFrag, std::map<const char*, const char*>({ std::pair<const char*, const char*>("Texture", "tex") }));
-	glUniform1i(glGetUniformLocation(DefaultShader->_program, "tex"), 0);
+	glUniform1i(glGetUniformLocation(DefaultShader->program, "tex"), 0);
 
 	// create screen quad
 	// opengl objects
