@@ -13,19 +13,11 @@
 #include <cmath>
 // c stl
 #include <stdio.h>
-#include <stdlib.h> 
-// SDL
+#include <stdlib.h>
+// OGRE
+#include <OGRE/Ogre.h>
+// SDL (for input)
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-// OpenGL
-#include <GL/glew.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-// Assimp
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
 // rapidjson
 #include <rapidjson/document.h>
 // fmod
@@ -34,21 +26,10 @@
 // Utils
 #include "FileUtils.h"
 #include "Maths.h"
-// Graphics: Common
-#include "InternalShaders.h"
-#include "Shader.h"
-#include "Texture.h"
-// Graphics: 3D
-#include "Camera.h"
-#include "Mesh.h"
-#include "Model.h"
 // Graphics: 2D
 #include "Drawable2D.h"
 #include "Sprite.h"
 #include "SpriteRenderer.h"
-// Graphics: Layers
-#include "RenderLayer.h"
-#include "Compositor.h"
 // scene/state management
 #include "Scene.h"
 #include "Director.h"

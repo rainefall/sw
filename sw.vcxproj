@@ -107,10 +107,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2maind.lib;opengl32.lib;fmod_vc.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2maind.lib;opengl32.lib;fmod_vc.lib;OgreMain_d.lib</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>$(SDL)\x86-windows-dbg;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SDL)\x86-windows-dbg;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x86;E:\repos\vcpkg\buildtrees\ogre\x86-windows-dbg\lib</AdditionalLibraryDirectories>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </Lib>
   </ItemDefinitionGroup>
@@ -168,7 +168,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc;E:\DevelopmentLibraries\ogre3d\bin</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -181,45 +181,28 @@
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Audio.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Compositor.h" />
     <ClInclude Include="ContentArchiveCompiler.h" />
     <ClInclude Include="Director.h" />
     <ClInclude Include="Drawable2D.h" />
     <ClInclude Include="FileUtils.h" />
     <ClInclude Include="Graphics.h" />
-    <ClInclude Include="Material.h" />
     <ClInclude Include="Maths.h" />
-    <ClInclude Include="Mesh.h" />
     <ClInclude Include="Input.h" />
-    <ClInclude Include="InternalShaders.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="RenderLayer.h" />
     <ClInclude Include="Scene.h" />
-    <ClInclude Include="Shader.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="sw.h" />
-    <ClInclude Include="Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Audio.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Compositor.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Input.cpp" />
-    <ClCompile Include="InternalShaders.cpp" />
     <ClCompile Include="Maths.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="RenderLayer.cpp" />
     <ClCompile Include="Director.cpp" />
     <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="sw.cpp" />
-    <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
