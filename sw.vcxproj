@@ -110,7 +110,7 @@
       <AdditionalDependencies>SDL2maind.lib;opengl32.lib;fmod_vc.lib;OgreMain_d.lib</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>$(SDL)\x86-windows-dbg;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x86;E:\repos\vcpkg\buildtrees\ogre\x86-windows-dbg\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(VCPKG)\buildtrees\sdl2\x86-windows-dbg;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x86;$(VCPKG)\buildtrees\ogre\x86-windows-dbg\lib</AdditionalLibraryDirectories>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </Lib>
   </ItemDefinitionGroup>
