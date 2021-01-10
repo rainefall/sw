@@ -18,7 +18,7 @@ namespace SouthwestEngine {
 
 		// initalize graphics
 		// return 0 on success, 1 on failure
-		static int Initialize(const char* wintitle);
+		static int Initialize(const std::string wintitle);
 
 		// draw the next frame
 		static void Update();

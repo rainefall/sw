@@ -8,8 +8,8 @@ namespace SouthwestEngine {
 	SDL_Window* Graphics::SDLWindow;
 	Ogre::RenderWindow* Graphics::RenderWindow;
 
-	int Graphics::Initialize(const char* wintitle) {
-		SDLWindow = SDL_CreateWindow(wintitle, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 960, 540, SDL_WINDOW_RESIZABLE);
+	int Graphics::Initialize(const std::string wintitle) {
+		SDLWindow = SDL_CreateWindow(wintitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 960, 540, SDL_WINDOW_RESIZABLE);
 
 		SDL_SysWMinfo wmInfo;
 		SDL_GetVersion(&wmInfo.version);

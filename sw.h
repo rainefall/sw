@@ -54,7 +54,7 @@ namespace SouthwestEngine {
 		// Initialize engine
 		// Returns 0 on success, 1 on failure
 		// org can be nullptr, it will default to Tobesoft for now
-		static int Initialize(const char* title, const char* org);
+		static int Initialize(const std::string title, const std::string org);
 
 		// Shutdown engine
 		static void Stop();
