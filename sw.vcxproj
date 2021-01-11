@@ -133,8 +133,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2maind.lib;opengl32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SDL)\x86-windows-dbg</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2main.lib;opengl32.lib;fmod_vc.lib;OgreMain.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(VCPKG)\buildtrees\sdl2\x86-windows-rel;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x86;$(VCPKG)\buildtrees\ogre\x86-windows-rel\lib</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -154,8 +154,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2maind.lib;opengl32.lib;fmod_vc.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(VCPKG)\buildtrees\sdl2\x64-windows-dbg;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2maind.lib;opengl32.lib;fmod_vc.lib;OgreMain_d.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(VCPKG)\buildtrees\sdl2\x64-windows-dbg;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64;$(VCPKG)\buildtrees\ogre\x64-windows-dbg\lib</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -168,7 +168,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc;E:\DevelopmentLibraries\ogre3d\bin</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -177,6 +177,10 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>SDL2main.lib;opengl32.lib;fmod_vc.lib;OgreMain.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(VCPKG)\buildtrees\sdl2\x64-windows-rel;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64;$(VCPKG)\buildtrees\ogre\x64-windows-rel\lib</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
