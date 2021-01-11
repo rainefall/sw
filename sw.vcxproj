@@ -155,7 +155,7 @@
     </Link>
     <Lib>
       <AdditionalDependencies>SDL2maind.lib;opengl32.lib;fmod_vc.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SDL)\x64-windows-dbg;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(VCPKG)\buildtrees\sdl2\x64-windows-dbg;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
