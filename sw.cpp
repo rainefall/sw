@@ -5,11 +5,13 @@ namespace SouthwestEngine {
 	bool Southwest::Running;
 	char* Southwest::_prefPath;
 
-	int Southwest::Initialize(const std::string title = "Southwest Engine", const std::string org = "Tobesoft") {	
+	int Southwest::Initialize(const std::string title = "SouthwestEngine", const std::string org = "Tobesoft") {	
 		if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 			SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
 			return 1;
 		}
+		// get writable path
+		_prefPath = SDL_GetPrefPath(title.c_str(), org.c_str());
 
 		// initialize graphics engine
 		if (Graphics::Initialize(title))
