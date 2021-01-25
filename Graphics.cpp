@@ -7,6 +7,8 @@ namespace SouthwestEngine {
 	Ogre::Root* Graphics::OgreRoot;
 	SDL_Window* Graphics::SDLWindow;
 	Ogre::RenderWindow* Graphics::RenderWindow;
+	float Graphics::_deltaTime;
+	float Graphics::_lastTick;
 
 	int Graphics::Initialize(const std::string wintitle) {
 		SDLWindow = SDL_CreateWindow(wintitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 960, 540, SDL_WINDOW_RESIZABLE);
@@ -32,11 +34,14 @@ namespace SouthwestEngine {
 		// create main window
 		RenderWindow = OgreRoot->createRenderWindow(wintitle, 960, 540, false, &params);
 
+		_lastTick = SDL_GetTicks();
 		return 0;
 	}
 
 	void Graphics::Update() {
 		OgreRoot->renderOneFrame();
+		_deltaTime = SDL_GetTicks() - _lastTick;
+		_lastTick = SDL_GetTicks();
 	}
 
 	void Graphics::Stop() {
@@ -44,5 +49,9 @@ namespace SouthwestEngine {
 		OgreRoot->shutdown();
 		// destroy sdl window
 		SDL_DestroyWindow(SDLWindow);
+	}
+
+	float Graphics::DeltaTime() {
+		return _deltaTime;
 	}
 }

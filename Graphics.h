@@ -10,11 +10,18 @@ namespace SouthwestEngine {
 	class Graphics {
 	private:
 		Graphics(); // instance this class and i will start crying
+
+		// delta time values
+		static float _deltaTime;
+		static float _lastTick;
 	public:
 		static SDL_Window* SDLWindow;
 
 		static Ogre::Root* OgreRoot;
 		static Ogre::RenderWindow* RenderWindow;
+
+		// time taken for last frame, in milliseconds
+		static float DeltaTime();
 
 		// initalize graphics
 		// return 0 on success, 1 on failure
