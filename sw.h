@@ -16,6 +16,8 @@
 #include <stdlib.h>
 // OGRE
 #include <OGRE/Ogre.h>
+#include <OGRE/Overlay/OgreOverlay.h>
+#include <OGRE/RTShaderSystem/OgreRTShaderSystem.h>
 // SDL (for input)
 #include <SDL2/SDL.h>
 // rapidjson

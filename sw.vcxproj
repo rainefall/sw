@@ -99,7 +99,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(OGRE)\Builds\sdk\include\;$(OGRE)\Builds\sdk\include\OGRE;C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -110,7 +110,7 @@
       <AdditionalDependencies>SDL2maind.lib;opengl32.lib;fmod_vc.lib;OgreMain_d.lib</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>$(VCPKG)\buildtrees\sdl2\x86-windows-dbg;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x86;$(VCPKG)\buildtrees\ogre\x86-windows-dbg\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(VCPKG)\buildtrees\sdl2\x86-windows-dbg;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x86;$(OGRE)\Builds\sdk\lib</AdditionalLibraryDirectories>
       <SuppressStartupBanner>false</SuppressStartupBanner>
     </Lib>
   </ItemDefinitionGroup>
@@ -134,7 +134,7 @@
     </Link>
     <Lib>
       <AdditionalDependencies>SDL2main.lib;opengl32.lib;fmod_vc.lib;OgreMain.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(VCPKG)\buildtrees\sdl2\x86-windows-rel;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x86;$(VCPKG)\buildtrees\ogre\x86-windows-rel\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(VCPKG)\buildtrees\sdl2\x86-windows-rel;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x86;$(VCPKG)\buildtrees\ogre\x86-windows-rel\lib;$(OGRE)\Builds\sdk\include\OGRE;$(OGRE)\Builds\sdk\include\OGRE\Plugins</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -146,7 +146,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(OGRE)\Builds\sdk\include\;$(OGRE)\Builds\sdk\include\OGRE;C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -154,8 +154,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2maind.lib;opengl32.lib;fmod_vc.lib;OgreMain_d.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(VCPKG)\buildtrees\sdl2\x64-windows-dbg;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64;$(VCPKG)\buildtrees\ogre\x64-windows-dbg\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2maind.lib;opengl32.lib;fmod_vc.lib;OgreMain_d.lib;OgreOverlay.lib;OgrePaging.lib;OgreRTShaderSystem.lib;OgreTerrain.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(VCPKG)\buildtrees\sdl2\x64-windows-dbg;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64;$(VCPKG)\buildtrees\ogre\x64-windows-dbg\lib;$(OGRE)\Builds\sdk\include\OGRE;$(OGRE)\Builds\sdk\include\OGRE\Plugins</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
