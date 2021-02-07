@@ -2,33 +2,58 @@
 
 using namespace SouthwestEngine;
 
-SDL_Joystick* Input::_joystick;
-const Uint8* Input::__SDL_Keyboard;
-Uint8* Input::__keyboard;
-Uint8* Input::__keyboardChange; // Do you need this one to be declared too?
-									  // Uncertain on if you plan to use it later,
-									  // so yeah take a declaration...!
-int Input::__arrSize;
+SDL_Joystick* Input::p_joystick;
+const Uint8* Input::p_SDL_Keyboard;
+Uint8* Input::p_keyboard;
+Uint8* Input::p_keyboardChange; // Do you need this one to be declared too?
+								// Uncertain on if you plan to use it later,
+								// so yeah take a declaration...!
+int Input::p_arrSize;
 
 void Input::Initialize() {
-	__arrSize = 0;
-	__SDL_Keyboard = SDL_GetKeyboardState(&__arrSize);
-	__keyboard = (Uint8*)malloc(__arrSize);
-	__keyboardChange = (Uint8*)malloc(__arrSize);
+	p_arrSize = 0;
+	p_SDL_Keyboard = SDL_GetKeyboardState(&p_arrSize);
+	p_keyboard = (Uint8*)malloc(p_arrSize);
+	p_keyboardChange = (Uint8*)malloc(p_arrSize);
 }
 
 void Input::Update() {
 	if (SDL_NumJoysticks() > 0) {
-		if (_joystick == nullptr) {
-			_joystick = SDL_JoystickOpen(0);
+		if (p_joystick == nullptr) {
+			p_joystick = SDL_JoystickOpen(0);
 		}
 		SDL_JoystickUpdate();
 	}
 	else {
 		// close joystick object if joystick is disconnected. this might be unnecessary i dont know if SDL does this for you
-		if (_joystick != nullptr) {
-			SDL_JoystickClose(_joystick);
-			_joystick = nullptr;
+		if (p_joystick != nullptr) {
+			SDL_JoystickClose(p_joystick);
+			p_joystick = nullptr;
+		}
+	}
+
+	// mouse
+	SDL_GetMouseState(&p_mouseX, &p_mouseY);
+
+	// update keyboard state changes
+	// i think keyboard input in general might want cleaning up a bit
+	for (int i = 0; i < p_arrSize; i++) {
+		if (p_keyboard[i] != p_SDL_Keyboard[i]) {
+			p_keyboard[i] = p_SDL_Keyboard[i];
+			p_keyboardChange[i] = 1 + p_keyboard[i];
+		}
+		else if (p_keyboardChange[i]) {
+			p_keyboardChange[i] = 0;
+		}
+	}
+
+	// update mouse state changes
+	for (int i = 0; i < 3; i++) {
+		if (p_mouseButtonState[i] > 1) {
+			p_mouseButtonState[i] = 1;
+		}
+		else if (p_mouseButtonState[i] < 0) {
+			p_mouseButtonState[i] = 0;
 		}
 	}
 
@@ -39,30 +64,36 @@ void Input::Update() {
 		case SDL_QUIT:
 			Southwest::Running = false;
 			break;
+		case SDL_MOUSEBUTTONDOWN:
+			p_mouseButtonState[e.button.button] = 2;
+		case SDL_MOUSEBUTTONUP:
+			p_mouseButtonState[e.button.button] = -1;
 		default:
 			break;
-		}
-	}
-
-	for (int i = 0; i < __arrSize; i++) {
-		if (__keyboard[i] != __SDL_Keyboard[i]) {
-			__keyboard[i] = __SDL_Keyboard[i];
-			__keyboardChange[i] = 1 + __keyboard[i];
-		}
-		else if (__keyboardChange[i]) {
-			__keyboardChange[i] = 0;
 		}
 	}
 }
 
 bool Input::Key(SDL_Scancode key) {
-	return (bool)__SDL_Keyboard[key];
+	return (bool)p_SDL_Keyboard[key];
 }
 
 bool Input::KeyDown(SDL_Scancode key) {
-	return __keyboardChange[key] == 2;
+	return p_keyboardChange[key] == 2;
 }
 
 bool Input::KeyUp(SDL_Scancode key) {
-	return __keyboardChange[key] == 1;
+	return p_keyboardChange[key] == 1;
+}
+
+bool Input::Mouse(int button) {
+	return p_mouseButtonState[button] > 0;
+}
+
+int Input::MouseX() {
+	return p_mouseX;
+}
+
+int Input::MouseY() {
+	return p_mouseY;
 }
