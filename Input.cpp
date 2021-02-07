@@ -9,6 +9,9 @@ Uint8* Input::p_keyboardChange; // Do you need this one to be declared too?
 								// Uncertain on if you plan to use it later,
 								// so yeah take a declaration...!
 int Input::p_arrSize;
+int Input::p_mouseButtonState[3];
+int Input::p_mouseX;
+int Input::p_mouseY;
 
 void Input::Initialize() {
 	p_arrSize = 0;
