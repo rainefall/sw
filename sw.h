@@ -16,8 +16,16 @@
 #include <stdlib.h>
 // OGRE
 #include <OGRE/Ogre.h>
+#include <OGRE/RTShaderSystem/OgreRTShaderSystem.h> // huh??
+// OGRE Overlays
 #include <OGRE/Overlay/OgreOverlay.h>
-#include <OGRE/RTShaderSystem/OgreRTShaderSystem.h>
+#include <OGRE/Overlay/OgreOverlaySystem.h>
+#include <OGRE/Overlay/OgreOverlayManager.h>
+#include <OGRE/Overlay/OgreOverlayElement.h>
+#include <OGRE/Overlay/OgreOverlayContainer.h>
+#include <OGRE/Overlay/OgreOverlayPrerequisites.h>
+#include <OGRE/Overlay/OgrePanelOverlayElement.h>
+#include <OGRE/Overlay/OgreTextAreaOverlayElement.h>
 // SDL (for input)
 #include <SDL2/SDL.h>
 // rapidjson
